@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Console;
+
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+
+class Kernel extends ConsoleKernel
+{
+    /**
+     * Define the application's command schedule.
+     */
+    protected function schedule(Schedule $schedule): void
+    {
+        // Verificação diária de IPs suspeitos
+        $schedule->command('ip:check-suspicious --threshold=40')
+            ->dailyAt('03:00')
+            ->appendOutputTo(storage_path('logs/suspicious-ips.log'));
+
+        // Limpeza semanal de inconsistências no sistema KYC (DESATIVADO)
+        // $schedule->command('kyc:cleanup-inconsistent --fix-orphaned-accounts --fix-missing-files')
+        //     ->weeklyOn(1, '02:00') // Segunda-feira às 02:00
+        //     ->appendOutputTo(storage_path('logs/kyc-cleanup.log'));
+    }
+
+    /**
+     * Register the commands for the application.
+     */
+    protected function commands(): void
+    {
+        $this->load(__DIR__.'/Commands');
+
+        require base_path('routes/console.php');
+    }
+}

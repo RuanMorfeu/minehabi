@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<script
+			disable-devtool-auto
+			src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"
+		></script>
+		<link rel="shortcut icon" type="image/webp" href="/assets/games/pacman/icon.webp" />
+		<link
+			href="https://fonts.googleapis.com/css?family=Press+Start+2P&amp;display=swap"
+			rel="stylesheet"
+		/>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<title>Pac-Man</title>
+
+		<style>
+			html, body {
+				overscroll-behavior: none;
+				overscroll-behavior-x: none;
+				touch-action: pan-y pinch-zoom;
+			}
+		</style>
+
+		<script>
+			// Bloqueia gestos de navegação do iOS (swipe back/forward)
+			(function() {
+				document.addEventListener('touchstart', function(e) {
+					if (e.touches.length === 1) {
+						window._touchStartX = e.touches[0].clientX;
+						window._touchStartY = e.touches[0].clientY;
+					}
+				}, { passive: false });
+
+				document.addEventListener('touchmove', function(e) {
+					if (e.touches.length === 1 && window._touchStartX !== undefined) {
+						var deltaX = Math.abs(e.touches[0].clientX - window._touchStartX);
+						var deltaY = Math.abs(e.touches[0].clientY - window._touchStartY);
+						if (deltaX > deltaY && (window._touchStartX < 30 || window._touchStartX > window.innerWidth - 30)) {
+							e.preventDefault();
+						}
+					}
+				}, { passive: false });
+
+				document.body.addEventListener('touchmove', function(e) {
+					if (e.touches.length === 1) {
+						var touch = e.touches[0];
+						if (touch.clientX < 20 || touch.clientX > window.innerWidth - 20) {
+							e.preventDefault();
+						}
+					}
+				}, { passive: false });
+
+				history.pushState(null, null, location.href);
+				window.addEventListener('popstate', function(e) {
+					history.pushState(null, null, location.href);
+				});
+			})();
+		</script>
+
+		<script>
+			// Ler parâmetros da URL
+			const params = new URLSearchParams(window.location.search);
+			const baseurl = decodeURIComponent(params.get("baseurl") || "");
+			const token = decodeURIComponent(params.get("token") || "");
+			const aposta = decodeURIComponent(params.get("aposta") || "1");
+			// Valores fixos para o modo demo (não pega mais da URL)
+			const lives = "1";
+			const coin_rate = "0.03";
+			const meta_multiplier = "5";
+			const ghost_points = "0.1";
+			const is_demo_agent = decodeURIComponent(params.get("is_demo_agent") || "false");
+
+			// Variáveis do jogo
+			let _lives = Number(lives)
+			let _bet = Number(aposta)
+			let _meta_multiplier = Number(meta_multiplier)
+			let _coin_rate = Number(coin_rate)
+			let _ghost_points = Number(ghost_points)
+
+			async function fetchApi(route, method = "GET", payload = null) {
+				return await fetch(route, {
+					method,
+					body: payload,
+				})
+					.then((res) => res.json())
+					.then((data) => {
+						return data
+					})
+					.catch((err) => {
+						console.log(err)
+					})
+			}
+
+			async function getData() {
+				// Se temos os parâmetros da URL, usar eles diretamente
+				if (token && aposta) {
+					console.log('Usando parâmetros da URL:', { _bet, _lives, _meta_multiplier, _coin_rate, _ghost_points });
+					// Carregar o jogo
+					loadGame();
+					return;
+				}
+				
+				// Fallback: tentar buscar da API com token
+				if (!token) {
+					alert("Token não encontrado. Reinicie o jogo.");
+					return;
+				}
+				const apiUrl = baseurl ? baseurl + '/pacman-exclusive/info?token=' + encodeURIComponent(token) : '/demo-game2/pacman-exclusive/info';
+			const data = await fetchApi(apiUrl)
+
+				if (!data || !data.last_balance || !data.last_balance.amount) {
+					alert("Você precisa iniciar um jogo")
+					// Redirecionar para página de perda
+					location.href = "/modal2/pacman-exclusive/loss/0"
+					return
+				}
+
+				_bet = Number(data.last_balance.amount)
+				_lives = Number(data.settings.lives)
+				_meta_multiplier = Number(data.settings.meta_multiplier)
+				_coin_rate = Number(data.settings.coin_rate)
+				_ghost_points = Number(data.settings.ghost_points)
+				
+				// Carregar o jogo
+				loadGame();
+			}
+			
+			function loadGame() {
+
+				const script = document.createElement("script")
+				script.src = "build/app.js"
+
+				document.head.appendChild(script)
+
+				// wait to script load
+				script.onload = () => {
+					const script2 = document.createElement("script")
+					script2.innerHTML = `
+            let gameCoordinator = new GameCoordinator()
+            document.body.style.overflow = ""
+          `
+
+					document.body.appendChild(script2)
+				}
+			}
+
+			async function winGame(valor) {
+				const formData = new FormData()
+				formData.append("ganho", valor)
+				formData.append("token", token)
+				
+				// Usar endpoint correto com token
+			const winUrl = baseurl ? baseurl + '/pacman-exclusive/win' : '/demo-game2/pacman-exclusive/win';
+			await fetchApi(winUrl, "POST", formData)
+
+				// Redirecionar de volta para o PlayModal com notificação de vitória
+				location.href = "/modal2/pacman-exclusive/win/" + valor
+			}
+
+			async function loseGame(accumuled, bet) {
+				const formData = new FormData()
+				formData.append("token", token)
+				
+				// Usar endpoint correto com token
+			const lostUrl = baseurl ? baseurl + '/pacman-exclusive/lost' : '/demo-game2/pacman-exclusive/lost';
+			await fetchApi(lostUrl, "POST", formData)
+
+				// Redirecionar para página principal com notificação de perda
+				location.href = "/modal2/pacman-exclusive/loss/" + _bet
+			}
+
+			getData()
+		</script>
+	</head>
+
+	<body style="overflow: hidden">
+		<div id="overflow-mask" class="overflow-mask">
+			<img id="backdrop" class="backdrop" src="app/style/graphics/backdrop.png" />
+
+			<div id="fps-display" class="fps-display"></div>
+			<div id="preload-div" class="preload-div"></div>
+
+			<div id="main-menu-container" class="main-menu-container">
+				<img id="logo" class="logo" src="app/style/graphics/pacman_logo.png" />
+				<button id="game-start" class="game-start">Iniciar</button>
+			</div>
+
+			<div class="header-buttons">
+				<button>
+					<i id="sound-button" class="material-icons"></i>
+				</button>
+			</div>
+
+			<div id="paused-text" class="paused-text"></div>
+
+			<div id="game-ui" class="game-ui">
+				<div id="row-top" class="row top">
+					<div class="column" style="text-align: left">
+						<div class="one-up">Moedas</div>
+						<div id="points-display"></div>
+					</div>
+					<div class="column" style="text-align: right">
+						<div>Meta</div>
+						<div id="high-score-display"></div>
+					</div>
+				</div>
+
+				<div id="checkout"></div>
+
+				<div id="maze" class="maze">
+					<img
+						id="maze-img"
+						class="maze-img"
+						src="app/style/graphics/spriteSheets/maze/maze_blue.svg"
+					/>
+					<div id="maze-cover" class="maze-cover"></div>
+					<div id="dot-container"></div>
+					<p id="pacman" class="pacman"></p>
+					<p id="pacman-arrow" class="pacman"></p>
+					<p id="clyde" class="ghost"></p>
+					<p id="inky" class="ghost"></p>
+					<p id="pinky" class="ghost"></p>
+					<p id="blinky" class="ghost"></p>
+				</div>
+
+				<div id="bottom-row" class="row bottom">
+					<div id="extra-lives" class="extra-lives"></div>
+					<div id="fruit-display" class="fruit-display"></div>
+				</div>
+			</div>
+
+			<div id="movement-buttons" class="movement-buttons">
+				<div class="row">
+					<div class="empty"></div>
+					<button id="button-up" class="button-up">
+						<i class="material-icons">keyboard_arrow_up</i>
+					</button>
+					<div class="empty"></div>
+				</div>
+				<div class="row">
+					<button id="button-left" class="button-left">
+						<i class="material-icons">keyboard_arrow_left</i>
+					</button>
+					<div class="empty"></div>
+					<button id="button-right" class="button-right">
+						<i class="material-icons">keyboard_arrow_right</i>
+					</button>
+				</div>
+				<div class="row">
+					<div class="empty"></div>
+					<button id="button-down" class="button-down">
+						<i class="material-icons">keyboard_arrow_down</i>
+					</button>
+					<div class="empty"></div>
+				</div>
+			</div>
+
+			<div id="left-cover" class="loading-cover left"></div>
+			<div id="right-cover" class="loading-cover right"></div>
+			<div id="loading-container" class="loading-container">
+				<div id="loading-pacman" class="loading-pacman"></div>
+				<div id="loading-dot-mask" class="loading-dot-mask"></div>
+				<div class="loading-dot _5"></div>
+				<div class="loading-dot _10"></div>
+				<div class="loading-dot _15"></div>
+				<div class="loading-dot _20"></div>
+				<div class="loading-dot _25"></div>
+				<div class="loading-dot _30"></div>
+				<div class="loading-dot _35"></div>
+				<div class="loading-dot _40"></div>
+				<div class="loading-dot _45"></div>
+				<div class="loading-dot _50"></div>
+				<div class="loading-dot _55"></div>
+				<div class="loading-dot _60"></div>
+				<div class="loading-dot _65"></div>
+				<div class="loading-dot _70"></div>
+				<div class="loading-dot _75"></div>
+				<div class="loading-dot _80"></div>
+				<div class="loading-dot _85"></div>
+				<div class="loading-dot _90"></div>
+				<div class="loading-dot _95"></div>
+			</div>
+
+			<div id="error-message" class="error-message">
+				<div class="header">
+					<div>OOPS!</div>
+					<div class="error-pacman"></div>
+				</div>
+				<div class="body">
+					Não foi possível carregar as imagens/sons necessários para jogar o jogo.
+
+					<br /><br />
+
+					Isso pode ser devido a uma conexão ruim, uma política de rede estrita ou por
+					jogar em um navegador não suportado.
+				</div>
+			</div>
+
+			<noscript>
+				<div id="error-message" class="error-message">
+					<div class="header">
+						<div>OOPS!</div>
+						<div class="error-pacman"></div>
+					</div>
+					<div class="body">
+						Não foi possível carregar as imagens/sons necessários para jogar o jogo.
+
+						<br /><br />
+
+						Isso pode ser devido a uma conexão ruim, uma política de rede estrita ou por
+						jogar em um navegador não suportado.
+					</div>
+				</div>
+			</noscript>
+		</div>
+	</body>
+	<script src="js/pacman.js"></script>
+	
+	<!-- Sistema de callback universal (padrão vgames) -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="../vgames2-callback.js"></script>
+	<script>
+		// Integração do PacMan com sistema de callback
+		window.addEventListener('load', function() {
+			// Verificar se o jogo tem acesso aos parâmetros
+			const params = VGames2Callback.getUrlParams();
+			console.log('PacMan - Parâmetros carregados:', params);
+			
+			// Disponibilizar função global para o jogo usar
+			window.processarGanhoPacman = function(valor) {
+				VGames2Callback.processarGanhoHibrido(
+					valor, 
+					params.aposta, 
+					params.token, 
+					params.baseurl, 
+					'pacman-exclusive',
+					function(success, data) {
+						console.log('PacMan - Ganho processado:', success, data);
+					}
+				);
+			};
+			
+			window.processarPerdaPacman = function() {
+				VGames2Callback.processarPerdaHibrida(
+					params.aposta, 
+					params.token, 
+					params.baseurl, 
+					'pacman-exclusive',
+					function(success, data) {
+						console.log('PacMan - Perda processada:', success, data);
+					}
+				);
+			};
+		});
+	</script>
+</body>
+</html>

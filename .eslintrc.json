@@ -1,0 +1,49 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:vue/vue3-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+    ],
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+        "ecmaVersion": 2021,
+        "sourceType": "module",
+        "parser": "@typescript-eslint/parser"
+    },
+    "plugins": ["vue", "@typescript-eslint"],
+    "rules": {
+        "vue/multi-word-component-names": "warn",
+        "vue/require-prop-types": "warn",
+        "vue/html-indent": ["warn", 4],
+        "no-unused-vars": "warn",
+        "vue/max-attributes-per-line": ["warn", {
+            "singleline": 3,
+            "multiline": 1
+        }],
+        "vue/html-self-closing": ["warn", {
+            "html": {
+                "void": "never",
+                "normal": "always",
+                "component": "always"
+            }
+        }],
+        "no-console": "warn",
+        "no-debugger": "warn",
+        "vue/no-v-html": "warn",
+        "vue/require-default-prop": "warn",
+        "vue/require-explicit-emits": "warn",
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "vue/no-unused-components": ["warn", {
+            "ignoreWhenBindingPresent": true
+        }],
+        "no-empty": "warn"
+    }
+}

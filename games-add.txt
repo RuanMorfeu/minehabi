@@ -1,0 +1,752 @@
+Criado Lucky Ducky -- bgaming
+Criado Wild Moon Thieves -- bgaming
+Criado Cherry Boom Christmas -- onlyplay
+Criado Glamour Crocodile Christmas -- onlyplay
+Criado Piggy Bonanza Christmas -- onlyplay
+Criado Deal Or No Deal -- evolution
+Criado Lightning Roulette -- evolution
+Criado Hindi Lightning Roulette -- evolution
+Criado Hippodrome Grand Casino -- evolution
+Criado Grand Casino Roulette -- evolution
+Criado Caribbean Stud Poker -- evolution
+Criado No Comm Speed Baccarat B -- evolution
+Criado No Comm Speed Baccarat C -- evolution
+Criado Ruleta En Vivo -- evolution
+Criado Bucharest Auto Roulette -- evolution
+Criado Speed Baccarat R -- evolution
+Criado Speed Baccarat S -- evolution
+Criado Classic Speed Blackjack 14 -- evolution
+Criado Golden Wealth Baccarat -- evolution
+Criado Infinite Fun Fun 21 Blackjack -- evolution
+Criado Hindi Roulette -- evolution
+Criado Lightning Sic Bo -- evolution
+Criado Korean Speed Baccarat E -- evolution
+Criado Korean Speed Baccarat D -- evolution
+Criado Classic Speed Blackjack 109 -- evolution
+Criado Peek Baccarat -- evolution
+Criado Korean Speed Baccarat C -- evolution
+Criado Speed Baccarat Q -- evolution
+Criado La Partage Francophone -- evolution
+Criado Classic Speed Blackjack 30 -- evolution
+Criado Classic Speed Blackjack 29 -- evolution
+Criado Classic Speed Blackjack 28 -- evolution
+Criado Classic Speed Blackjack 2 -- evolution
+Criado Classic Speed Blackjack 32 -- evolution
+Criado Blackjack Classic 53 -- evolution
+Criado Blackjack B -- evolution
+Criado Blackjack Classic 9 -- evolution
+Criado Blackjack Classic 8 -- evolution
+Criado Blackjack Platinum VIP -- evolution
+Criado Crazy Balls -- evolution
+Criado Super Speed Baccarat -- evolution
+Criado Midas Fortune -- pgsoft
+Criado Mermaid Riches -- pgsoft
+Criado Medusa II -- pgsoft
+Criado Medusa -- pgsoft
+Criado Mask Carnival -- pgsoft
+Criado Majestic Treasures -- pgsoft
+Criado Mahjong Ways 2 -- pgsoft
+Criado Mahjong Ways -- pgsoft
+Criado Lucky Piggy -- pgsoft
+Criado Lucky Neko -- pgsoft
+Criado Legend of Perseus -- pgsoft
+Criado Jurassic Kingdom -- pgsoft
+Criado Jungle Delight -- pgsoft
+Criado Journey to the Wealth -- pgsoft
+Criado Jewels of Prosperity -- pgsoft
+Criado Jack Frosts Winter -- pgsoft
+Criado Hotpot -- pgsoft
+Criado Hood vs Wolf -- pgsoft
+Criado Honey Trap of Diao Chan -- pgsoft
+Criado Hip Hop Panda -- pgsoft
+Criado Hawaiian Tiki -- pgsoft
+Criado Genies 3 Wishes -- pgsoft
+Criado Gem Saviour Sword -- pgsoft
+Criado Gem Saviour Conquest -- pgsoft
+Criado Gem Saviour -- pgsoft
+Criado Garuda Gems -- pgsoft
+Criado Ganesha Gold -- pgsoft
+Criado Ganesha Fortune -- pgsoft
+Criado Fortune Rabbit -- pgsoft
+Criado Fortune Ox -- pgsoft
+Criado Fortune Gods -- pgsoft
+Criado Flirting Scholar -- pgsoft
+Criado Emoji Riches -- pgsoft
+Criado Dreams of Macau -- pgsoft
+Criado Dragon Tiger Luck -- pgsoft
+Criado Dragon Legend -- pgsoft
+Criado Double Fortune -- pgsoft
+Criado Diner Delights -- pgsoft
+Criado Destiny of Sun and Moon -- pgsoft
+Criado Crypto Gold -- pgsoft
+Criado Cocktail Nights -- pgsoft
+Criado Circus Delight -- pgsoft
+Criado Captains Bounty -- pgsoft
+Criado Candy Bonanza -- pgsoft
+Criado Caishen Wins -- pgsoft
+Criado Butterfly Blossom -- pgsoft
+Criado Buffalo Win -- pgsoft
+Criado Battleground Royale -- pgsoft
+Criado Bali Vacation -- pgsoft
+Criado Baccarat Deluxe -- pgsoft
+Criado Asgardian Rising -- pgsoft
+Criado Legendary Monkey King -- pgsoft
+Criado Heist Stakes -- pgsoft
+Criado Guardians of Ice and Fire -- pgsoft
+Criado Emperor's Favour -- pgsoft
+Criado Craps -- evolution
+Criado Bucharest Roulette -- evolution
+Criado Turkish Lightning Roulette -- evolution
+Criado Arabic Roulette -- evolution
+Criado Extreme Texas Holdem -- evolution
+Criado Classic Speed Blackjack 99 -- evolution
+Criado Classic Speed Blackjack 93 -- evolution
+Criado Classic Speed Blackjack 75 -- evolution
+Criado Bucharest Infinite Free Bet Blackjack -- evolution
+Criado Svensk Roulette -- evolution
+Criado Super Sic Bo -- evolution
+Criado Japanese Roulette -- evolution
+Criado Dansk Roulette -- evolution
+Criado Blackjack VIP P -- evolution
+Criado Blackjack VIP U -- evolution
+Criado Alchemy Gold -- pgsoft
+Criado Casino Hold'em Italia -- evolution
+Criado Venezia Roulette -- evolution
+Criado Speed Blackjack 57 - Emerald -- pragmaticplaylive
+Criado Blackjack 103 - Emerald -- pragmaticplaylive
+Criado Speed Blackjack 32 - Emerald -- pragmaticplaylive
+Criado Blackjack X 12 - Emerald -- pragmaticplaylive
+Criado Blackjack X 14 - Ruby -- pragmaticplaylive
+Criado Romanian Roulette -- pragmaticplaylive
+Criado Blackjack 62 - Azure -- pragmaticplaylive
+Criado Blackjack 48 - Ruby -- pragmaticplaylive
+Criado Blackjack 11 -- pragmaticplaylive
+Criado Baccarat 2 -- pragmaticplaylive
+Criado Auto-Roulette 1 -- pragmaticplaylive
+Criado Blackjack X 22 - Emerald -- pragmaticplaylive
+Criado Game Show Lobby -- pragmaticplaylive
+Criado Lobby Roulette -- pragmaticplaylive
+Criado Vegas Ball Bonanza -- pragmaticplaylive
+Criado Mega Sic Bo -- pragmaticplaylive
+Criado Baccarat 7 -- pragmaticplaylive
+Criado Mega Wheel -- pragmaticplaylive
+Criado Mega Roulette - Brazilian -- pragmaticplaylive
+Criado Mega Roulette -- pragmaticplaylive
+Criado Blackjack 29 - Azure 2 -- pragmaticplaylive
+Criado VIP Blackjack 3 – Ruby -- pragmaticplaylive
+Criado Baccarat 6 -- pragmaticplaylive
+Criado Speed Blackjack 60 - Emerald -- pragmaticplaylive
+Criado Blackjack X 30 - Emerald -- pragmaticplaylive
+Criado Speed Blackjack 34 - Emerald -- pragmaticplaylive
+Criado Blackjack 36 – The Club -- pragmaticplaylive
+Criado VIP Blackjack 8 - Emerald -- pragmaticplaylive
+Criado Blackjack 8 - Azure -- pragmaticplaylive
+Criado Blackjack 60 - Azure -- pragmaticplaylive
+Criado Speed Blackjack 37 - The Club -- pragmaticplaylive
+Criado Blackjack 42 - Ruby -- pragmaticplaylive
+Criado Blackjack X 16 - Azure -- pragmaticplaylive
+Criado Speed Blackjack 7 - Ruby -- pragmaticplaylive
+Criado Blackjack 95 - Emerald -- pragmaticplaylive
+Criado Prive Lounge Blackjack 9 -- pragmaticplaylive
+Criado BlackJack 25 - Azure -- pragmaticplaylive
+Criado Blackjack 99 - Azure -- pragmaticplaylive
+Criado Blackjack 57 - Azure -- pragmaticplaylive
+Criado Blackjack X 7 - Azure -- pragmaticplaylive
+Criado Blackjack 63 - Azure -- pragmaticplaylive
+Criado Blackjack 35 – The Club -- pragmaticplaylive
+Criado BlackJack 22 - Azure -- pragmaticplaylive
+Criado Speed Blackjack 29 - Emerald -- pragmaticplaylive
+Criado Blackjack X 4 - Ruby -- pragmaticplaylive
+Criado Blackjack 83 - Emerald -- pragmaticplaylive
+Criado Speed Blackjack 48 - Emerald -- pragmaticplaylive
+Criado Blackjack X 28 - Emerald -- pragmaticplaylive
+Criado Blackjack X 13 - Emerald -- pragmaticplaylive
+Criado Blackjack X 17 - Azure -- pragmaticplaylive
+Criado Roulette 3 - Macao -- pragmaticplaylive
+Criado Blackjack 89 - Emerald -- pragmaticplaylive
+Criado Speed Blackjack 11 - Azure -- pragmaticplaylive
+Criado ONE Blackjack 2 - Ruby -- pragmaticplaylive
+Criado No Comm Speed Baccarat 2 -- pragmaticplaylive
+Criado Speed Blackjack 46 - Azure -- pragmaticplaylive
+Criado Speed Blackjack 31 - Emerald -- pragmaticplaylive
+Criado Blackjack 1 - Azure -- pragmaticplaylive
+Criado Prive Lounge Baccarat 8 -- pragmaticplaylive
+Criado Blackjack 70 - Ruby -- pragmaticplaylive
+Criado Blackjack 51 - Ruby -- pragmaticplaylive
+Criado Speed Blackjack 30 - Emerald -- pragmaticplaylive
+Criado Speed Blackjack 22 - Emerald -- pragmaticplaylive
+Criado BlackJack 24 - Azure -- pragmaticplaylive
+Criado Speed Blackjack 3 – Ruby -- pragmaticplaylive
+Criado Blackjack 80 - Emerald -- pragmaticplaylive
+Criado Blackjack 106 - Emerald -- pragmaticplaylive
+Criado Blackjack 49 - Ruby -- pragmaticplaylive
+Criado Blackjack 91 - Azure -- pragmaticplaylive
+Criado Blackjack 10 - Azure -- pragmaticplaylive
+Criado Speed Blackjack 59 - Emerald -- pragmaticplaylive
+Criado Blackjack 61 - Azure -- pragmaticplaylive
+Criado Speed Auto-Roulette 1 -- pragmaticplaylive
+Criado Baccarat 1 -- pragmaticplaylive
+Criado Blackjack 44 - Ruby -- pragmaticplaylive
+Criado Blackjack 64 - Ruby -- pragmaticplaylive
+Criado Speed Blackjack 19 - Emerald -- pragmaticplaylive
+Criado Blackjack 65 - Ruby -- pragmaticplaylive
+Criado Speed Blackjack 40 - Emerald -- pragmaticplaylive
+Criado Prive Lounge Baccarat 2 -- pragmaticplaylive
+Criado Blackjack 82 - Emerald -- pragmaticplaylive
+Criado Blackjack 81 - Emerald -- pragmaticplaylive
+Criado Speed Blackjack 10 - Ruby -- pragmaticplaylive
+Criado Blackjack 50 - Ruby -- pragmaticplaylive
+Criado Speed Blackjack 55 - Emerald -- pragmaticplaylive
+Criado Speed Blackjack 26 - Emerald -- pragmaticplaylive
+Criado Blackjack 34 – The Club -- pragmaticplaylive
+Criado Speed Blackjack 58 - Emerald -- pragmaticplaylive
+Criado VIP Auto Roulette -- pragmaticplaylive
+Criado Speed Blackjack 42 - Emerald -- pragmaticplaylive
+Criado Blackjack 90 - Azure -- pragmaticplaylive
+Criado Blackjack X 6 - Azure -- pragmaticplaylive
+Criado Blackjack 59 - Azure -- pragmaticplaylive
+Criado Blackjack 15 -- pragmaticplaylive
+Criado Blackjack 86 - Ruby -- pragmaticplaylive
+Criado Roulette Ruby -- pragmaticplaylive
+Criado PowerUP Roulette -- pragmaticplaylive
+Criado No Comm Baccarat 1 -- pragmaticplaylive
+Criado ONE Blackjack -- pragmaticplaylive
+Criado Blackjack 93 - Azure -- pragmaticplaylive
+Criado Blackjack 107 - Emerald -- pragmaticplaylive
+Criado Prive Lounge Blackjack 8 -- pragmaticplaylive
+Criado Blackjack X 9 - Ruby -- pragmaticplaylive
+Criado Blackjack X 18 - Azure -- pragmaticplaylive
+Criado Prive Lounge Baccarat 1 -- pragmaticplaylive
+Criado Speed Blackjack 21 - Emerald -- pragmaticplaylive
+Criado Speed Baccarat 10 -- pragmaticplaylive
+Criado Blackjack 40 - Ruby -- pragmaticplaylive
+Criado Speed Baccarat 11 -- pragmaticplaylive
+Criado Blackjack 9 - Azure -- pragmaticplaylive
+Criado Baccarat 5 -- pragmaticplaylive
+Criado Blackjack X 3 - Azure -- pragmaticplaylive
+Criado Blackjack X 29 - Emerald -- pragmaticplaylive
+Criado Speed Baccarat 1 -- pragmaticplaylive
+Criado Blackjack 5 - Azure -- pragmaticplaylive
+Criado Speed Blackjack 36 - The Club -- pragmaticplaylive
+Criado Speed Baccarat 9 -- pragmaticplaylive
+Criado Speed Blackjack 27 - Emerald -- pragmaticplaylive
+Criado Blackjack X 8 - Ruby -- pragmaticplaylive
+Criado Roulette 1 - Azure -- pragmaticplaylive
+Criado Blackjack 100 - Azure -- pragmaticplaylive
+Criado Super 8 Baccarat -- pragmaticplaylive
+Criado Speed Blackjack 39 - Ruby -- pragmaticplaylive
+Criado Speed Blackjack 49 - Emerald -- pragmaticplaylive
+Criado Blackjack 94 - Emerald -- pragmaticplaylive
+Criado Prive Lounge Blackjack 6 -- pragmaticplaylive
+Criado Blackjack X 27 - Emerald -- pragmaticplaylive
+Criado Blackjack X 26 - Emerald -- pragmaticplaylive
+Criado Blackjack X 19 - Ruby -- pragmaticplaylive
+Criado Blackjack X 15 - Ruby -- pragmaticplaylive
+Criado Blackjack X 10 - Ruby -- pragmaticplaylive
+Criado Blackjack 76 - Azure -- pragmaticplaylive
+Criado Prive Lounge Baccarat 5 -- pragmaticplaylive
+Criado VIP Roulette - The Club -- pragmaticplaylive
+Criado Lucky 6 Roulette -- pragmaticplaylive
+Criado Speed Blackjack 25 - Emerald -- pragmaticplaylive
+Criado Speed Blackjack 14 - Azure -- pragmaticplaylive
+Criado Speed Roulette 2 -- pragmaticplaylive
+Criado Blackjack 41 - Ruby -- pragmaticplaylive
+Criado Speed Baccarat 12 -- pragmaticplaylive
+Criado Baccarat 8 -- pragmaticplaylive
+Criado Baccarat 3 -- pragmaticplaylive
+Criado Blackjack 16 -- pragmaticplaylive
+Criado Blackjack 14 -- pragmaticplaylive
+Criado Blackjack Lobby -- pragmaticplaylive
+Criado Dragon Tiger -- pragmaticplaylive
+Criado Blackjack 7 - Azure -- pragmaticplaylive
+Criado Sweet Bonanza Candyland -- pragmaticplaylive
+Criado Speed Blackjack 61 - Emerald -- pragmaticplaylive
+Criado Blackjack 108 - Emerald -- pragmaticplaylive
+Criado Blackjack 105 - Emerald -- pragmaticplaylive
+Criado Speed Blackjack 50 - Emerald -- pragmaticplaylive
+Criado Blackjack 85 - Emerald -- pragmaticplaylive
+Criado Blackjack X 23 - Emerald -- pragmaticplaylive
+Criado Blackjack X 11 - Emerald -- pragmaticplaylive
+Criado Blackjack X 20 - Ruby -- pragmaticplaylive
+Criado Blackjack X 1 - Azure -- pragmaticplaylive
+Criado Blackjack 58 - Azure -- pragmaticplaylive
+Criado Blackjack 39 - Ruby -- pragmaticplaylive
+Criado Blackjack 38 - Ruby -- pragmaticplaylive
+Criado Speed Baccarat 8 -- pragmaticplaylive
+Criado Speed Baccarat 2 -- pragmaticplaylive
+Criado Blackjack 2 - Azure -- pragmaticplaylive
+Criado Blackjack 4 - Azure -- pragmaticplaylive
+Criado Auto Mega Roulette -- pragmaticplaylive
+Criado Aviator -- spribe
+Criado Prive Lounge Blackjack 10 -- pragmaticplaylive
+Criado Blackjack 104 - Emerald -- pragmaticplaylive
+Criado Blackjack 102 - Emerald -- pragmaticplaylive
+Criado Prive Lounge Blackjack 7 -- pragmaticplaylive
+Criado Blackjack X 24 - Azure -- pragmaticplaylive
+Criado Blackjack X 21 - Ruby -- pragmaticplaylive
+Criado Blackjack X 5 - Ruby -- pragmaticplaylive
+Criado Blackjack 75 - Azure -- pragmaticplaylive
+Criado Prive Lounge Baccarat 3 -- pragmaticplaylive
+Criado Speed Blackjack 20 - Emerald -- pragmaticplaylive
+Criado Mega Baccarat -- pragmaticplaylive
+Criado Fortune 6 Baccarat -- pragmaticplaylive
+Criado Blackjack 47 - Ruby -- pragmaticplaylive
+Criado Blackjack 37 - Ruby -- pragmaticplaylive
+Criado Speed Blackjack 38 - Ruby -- pragmaticplaylive
+Criado Blackjack 96 - Emerald -- pragmaticplaylive
+Criado Blackjack 84 - Emerald -- pragmaticplaylive
+Criado VIP Blackjack 14 - Emerald -- pragmaticplaylive
+Criado Blackjack 79 - Emerald -- pragmaticplaylive
+Criado Blackjack X 25 - Azure -- pragmaticplaylive
+Criado Blackjack X 2 - Azure -- pragmaticplaylive
+Criado Prive Lounge Baccarat 4 -- pragmaticplaylive
+Criado VIP Blackjack 1 - Ruby -- pragmaticplaylive
+Criado Speed Blackjack 28 - Emerald -- pragmaticplaylive
+Criado Speed Blackjack 24 - Emerald -- pragmaticplaylive
+Criado Speed Baccarat 13 -- pragmaticplaylive
+Criado Blackjack 46 - Ruby -- pragmaticplaylive
+Criado Blackjack 45 - Ruby -- pragmaticplaylive
+Criado Speed Baccarat 7 -- pragmaticplaylive
+Criado Baccarat Lobby -- pragmaticplaylive
+Criado Live Casino Lobby -- pragmaticplaylive
+Criado Speed Blackjack 56 - Emerald -- pragmaticplaylive
+Criado Blackjack 43 - Ruby -- pragmaticplaylive
+Criado Andar Bahar -- pragmaticplaylive
+Criado Speed Baccarat 3 -- pragmaticplaylive
+Criado Blackjack 6 - Azure -- pragmaticplaylive
+Criado Boom City -- pragmaticplaylive
+Criado Plinko -- spribe
+Criado Mini Roulette -- spribe
+Criado Mines -- spribe
+Criado Hotline -- spribe
+Criado Hi Lo -- spribe
+Criado Goal -- spribe
+Criado Dice -- spribe
+Criado Blackjack 3 - Azure -- pragmaticplaylive
+Criado Keno -- spribe
+Criado Crystal Treasure -- onlyplay
+Criado Alien Digger -- onlyplay
+Criado Rotating Element -- bgaming
+Criado Piggy Bonanza Halloween -- onlyplay
+Criado VIP Roulette -- evolution
+Criado Fortuna TRUEWAYS -- bgaming
+Criado Royal Fruits MultiLines -- bgaming
+Criado Voodoo People -- bgaming
+Criado Fishing Club -- bgaming
+Criado Frozen Garden -- onlyplay
+Criado Day of Muerte -- onlyplay
+Criado Lightning Baccarat -- evolution
+Criado Classic Speed Blackjack 101 -- evolution
+Criado Hindi Speed Baccarat -- evolution
+Criado Hindi Speed Baccarat B -- evolution
+Criado Classic Speed Blackjack 95 -- evolution
+Criado Sic Bo -- pragmaticplaylive
+Criado No Comm Speed Baccarat A -- evolution
+Criado Monopoly Live -- evolution
+Criado Korean Speed Baccarat B -- evolution
+Criado Blackjack Silver B -- evolution
+Criado Blackjack Silver A -- evolution
+Criado Korean Speed Baccarat A -- evolution
+Criado French Roulette Gold -- evolution
+Criado Blackjack Grand VIP -- evolution
+Criado Forge of Wealth -- pgsoft
+Criado Ultimate Striker -- pgsoft
+Criado Cruise Royale -- pgsoft
+Criado Wings of Iguazu -- pgsoft
+Criado Yakuza Honor -- pgsoft
+Criado Shark Hunter -- pgsoft
+Criado Mystic Potions -- pgsoft
+Criado Anubis Wrath -- pgsoft
+Criado Wild Heist Cashout -- pgsoft
+Criado Mafia Mayhem -- pgsoft
+Criado Tsar Treasures -- pgsoft
+Criado Fortune Dragon -- pgsoft
+Criado Super Golf Drive -- pgsoft
+Criado Mystical Spirits -- pgsoft
+Criado Songkran Splash -- pgsoft
+Criado Bakery Bonanza -- pgsoft
+Criado Win Win Won -- pgsoft
+Criado Win Win Fish Prawn Crab -- pgsoft
+Criado Safari Wilds -- pgsoft
+Criado Wild Ape #3258 -- pgsoft
+Criado Chicky Run -- pgsoft
+Criado Gemstones Gold -- pgsoft
+Criado Dragon Hatch 2 -- pgsoft
+Criado Pinata Wins -- pgsoft
+Criado Blackjack Fortune VIP -- evolution
+Criado Zombie Outbreak -- pgsoft
+Criado Futebol Fever -- pgsoft
+Criado Gladiator's Glory -- pgsoft
+Criado Blackjack Diamond VIP -- evolution
+Criado Blackjack A -- evolution
+Criado Baccarat Squeeze -- evolution
+Criado Baccarat Controlled Squeeze -- evolution
+Criado Baccarat C -- evolution
+Criado Glamour Crocodile -- onlyplay
+Criado Saint Bananas -- onlyplay
+Criado Alchemy Academy -- bgaming
+Criado First Person Golden Wealth Baccarat -- evolution
+Criado Train to Rio Grande -- bgaming
+Criado Zombolics -- onlyplay
+Criado Retro Pedro -- onlyplay
+Criado Cherry Boom -- onlyplay
+Criado Bac Bo Ao Vivo -- evolution
+Criado Two Hand Casino Holdem -- evolution
+Criado Auto Roulette VIP -- evolution
+Criado Lightning Ball -- evolution
+Criado Lightning Storm -- evolution
+Criado Texas Dragons -- onlyplay
+Criado Wild West TRUEWAYS -- bgaming
+Criado Gold Magnate -- bgaming
+Criado Tropicana Fruits -- onlyplay
+Criado Wild Fireworks -- pgsoft
+Criado Wild Coaster -- pgsoft
+Criado Wild Bounty Showdown -- pgsoft
+Criado Wild Bandito -- pgsoft
+Criado Ways of the Qilin -- pgsoft
+Criado Tree of Fortune -- pgsoft
+Criado Treasures of Aztec -- pgsoft
+Criado Roleta Ao Vivo -- evolution
+Criado Free Bet Blackjack 2 -- evolution
+Criado Free Bet Blackjack 7 -- evolution
+Criado Klasik Blackjack 8 -- evolution
+Criado Blackjack Classic 66 -- evolution
+Criado Free Bet Blackjack 6 -- evolution
+Criado Free Bet Blackjack 5 -- evolution
+Criado Klasik Speed Blackjack 3 -- evolution
+Criado Speed Baccarat Z -- evolution
+Criado Ruleta Bola Rapida en Vivo -- evolution
+Criado Klasik Blackjack 9 -- evolution
+Criado Classic Speed Blackjack 31 -- evolution
+Criado Free Bet Blackjack 3 -- evolution
+Criado Three Card Poker -- evolution
+Criado Speed Roulette -- evolution
+Criado Blackjack Classic 59 -- evolution
+Criado Blackjack Classic 58 -- evolution
+Criado Blackjack Classic 57 -- evolution
+Criado Blackjack Classic 56 -- evolution
+Criado Blackjack Classic 54 -- evolution
+Criado Blackjack Classic 55 -- evolution
+Criado Auto-Roulette -- evolution
+Criado Instant Roulette -- evolution
+Criado Casino Holdem -- evolution
+Criado Klasik Blackjack 2 -- evolution
+Criado Klasik Blackjack 3 -- evolution
+Criado Klasik Blackjack 4 -- evolution
+Criado Klasik Blackjack 5 -- evolution
+Criado Klasik Speed Blackjack 1 -- evolution
+Criado Klasik Speed Blackjack 2 -- evolution
+Criado Speed Baccarat X -- evolution
+Criado Speed Baccarat W -- evolution
+Criado Speed Baccarat V -- evolution
+Criado Speed Baccarat U -- evolution
+Criado Speed Baccarat T -- evolution
+Criado Immersive Roulette -- evolution
+Criado Classic Speed Blackjack 7 -- evolution
+Criado Classic Speed Blackjack 66 -- evolution
+Criado Classic Speed Blackjack 64 -- evolution
+Criado Classic Speed Blackjack 65 -- evolution
+Criado Classic Speed Blackjack 63 -- evolution
+Criado Classic Speed Blackjack 62 -- evolution
+Criado Classic Speed Blackjack 25 -- evolution
+Criado Classic Speed Blackjack 20 -- evolution
+Criado Blackjack Classic 75 -- evolution
+Criado Blackjack Classic 74 -- evolution
+Criado Blackjack Classic 73 -- evolution
+Criado Blackjack Classic 71 -- evolution
+Criado Blackjack Classic 72 -- evolution
+Criado Blackjack Classic 68 -- evolution
+Criado Blackjack Classic 67 -- evolution
+Criado Blackjack Classic 65 -- evolution
+Criado Blackjack Classic 64 -- evolution
+Criado Blackjack Classic 63 -- evolution
+Criado Blackjack Classic 62 -- evolution
+Criado Blackjack Classic 61 -- evolution
+Criado Blackjack Classic 60 -- evolution
+Criado Blackjack Classic 46 -- evolution
+Criado Blackjack Classic 47 -- evolution
+Criado Blackjack Classic 45 -- evolution
+Criado Blackjack Classic 44 -- evolution
+Criado Blackjack Classic 25 -- evolution
+Criado Blackjack Classic 24 -- evolution
+Criado Blackjack Classic 20 -- evolution
+Criado Blackjack Classic 18 -- evolution
+Criado Blackjack Classic 17 -- evolution
+Criado Classic Speed Blackjack 61 -- evolution
+Criado Classic Speed Blackjack 60 -- evolution
+Criado Classic Speed Blackjack 59 -- evolution
+Criado Classic Speed Blackjack 56 -- evolution
+Criado Classic Speed Blackjack 55 -- evolution
+Criado Classic Speed Blackjack 54 -- evolution
+Criado Classic Speed Blackjack 53 -- evolution
+Criado Classic Speed Blackjack 51 -- evolution
+Criado Classic Speed Blackjack 50 -- evolution
+Criado Classic Speed Blackjack 49 -- evolution
+Criado Classic Speed Blackjack 48 -- evolution
+Criado Classic Speed Blackjack 47 -- evolution
+Criado Classic Speed Blackjack 46 -- evolution
+Criado Classic Speed Blackjack 45 -- evolution
+Criado Classic Speed Blackjack 43 -- evolution
+Criado Classic Speed Blackjack 44 -- evolution
+Criado Classic Speed Blackjack 42 -- evolution
+Criado Classic Speed Blackjack 41 -- evolution
+Criado Classic Speed Blackjack 58 -- evolution
+Criado Classic Speed Blackjack 57 -- evolution
+Criado Classic Speed Blackjack 39 -- evolution
+Criado Classic Speed Blackjack 38 -- evolution
+Criado Classic Speed Blackjack 40 -- evolution
+Criado Blackjack Classic 52 -- evolution
+Criado Blackjack Classic 51 -- evolution
+Criado Blackjack Classic 50 -- evolution
+Criado Blackjack Classic 48 -- evolution
+Criado Blackjack Classic 49 -- evolution
+Criado Blackjack Classic 43 -- evolution
+Criado Blackjack Classic 35 -- evolution
+Criado Blackjack Classic 30 -- evolution
+Criado Blackjack Classic 29 -- evolution
+Criado Blackjack Classic 26 -- evolution
+Criado Classic Speed Blackjack 35 -- evolution
+Criado Classic Speed Blackjack 33 -- evolution
+Criado Classic Speed Blackjack 37 -- evolution
+Criado Classic Speed Blackjack 27 -- evolution
+Criado Classic Speed Blackjack 26 -- evolution
+Criado Classic Speed Blackjack 24 -- evolution
+Criado Classic Speed Blackjack 23 -- evolution
+Criado Classic Speed Blackjack 36 -- evolution
+Criado Classic Speed Blackjack 34 -- evolution
+Criado Classic Speed Blackjack 12 -- evolution
+Criado Classic Speed Blackjack 15 -- evolution
+Criado No Commission Baccarat -- evolution
+Criado Classic Speed Blackjack 22 -- evolution
+Criado Classic Speed Blackjack 21 -- evolution
+Criado Classic Speed Blackjack 16 -- evolution
+Criado Classic Speed Blackjack 13 -- evolution
+Criado Speed Baccarat O -- evolution
+Criado Speed Baccarat N -- evolution
+Criado Speed Baccarat M -- evolution
+Criado Classic Speed Blackjack 4 -- evolution
+Criado Speed Baccarat L -- evolution
+Criado Speed Baccarat K -- evolution
+Criado Speed Baccarat J -- evolution
+Criado Speed Baccarat I -- evolution
+Criado Speed Baccarat G -- evolution
+Criado Speed Baccarat H -- evolution
+Criado Speed Baccarat F -- evolution
+Criado Classic Speed Blackjack 8 -- evolution
+Criado Classic Speed Blackjack 9 -- evolution
+Criado Classic Speed Blackjack 6 -- evolution
+Criado Classic Speed Blackjack 52 -- evolution
+Criado Classic Speed Blackjack 5 -- evolution
+Criado Sugar Valley -- onlyplay
+Criado Space Horror -- onlyplay
+Criado Urban Tastes -- onlyplay
+Criado Dragon Gates -- onlyplay
+Criado Aviamasters -- bgaming
+Criado Alien Fruits 2 -- bgaming
+Criado Totem Wonders -- pgsoft
+Criado Speed Baccarat P -- evolution
+Criado Panda Luck -- bgaming
+Criado Burning Chilli X -- bgaming
+Criado Royal High-Road -- bgaming
+Criado Graffiti in Sydney -- onlyplay
+Criado Labour Day -- onlyplay
+Criado Clown Coins -- onlyplay
+Criado Lucky Borscht -- onlyplay
+Criado Jack Potter in Vegas -- onlyplay
+Criado Book of Mystery Pyramids -- onlyplay
+Criado Crown of Afrodita -- onlyplay
+Criado Friday in Vegas -- onlyplay
+Criado Monster Hunt -- bgaming
+Criado The Great Icescape -- pgsoft
+Criado Weekend in Varanasi -- onlyplay
+Criado Magical Istanbul -- onlyplay
+Criado Witch's Secret -- onlyplay
+Criado Caucasian Wolf -- onlyplay
+Criado Ultimate Texas Holdem -- evolution
+Criado Evolution Top -- evolution
+Criado XXXTreme Lightning Roulette -- evolution
+Criado Prosperity Tree Baccarat -- evolution
+Criado Lightning Blackjack -- evolution
+Criado Gonzos Treasure Map -- evolution
+Criado Dragon Tiger -- evolution
+Criado XXXtreme Lightning Baccarat -- evolution
+Criado Punto Banco -- evolution
+Criado Crazy Pachinko -- evolution
+Criado Speed Baccarat 2 -- evolution
+Criado Speed Baccarat 1 -- evolution
+Criado Gemza -- bgaming
+Criado Tramp Day -- bgaming
+Criado Hottest 666 -- bgaming
+Criado Gold Vault Roulette -- evolution
+Criado Red Dragon Ways -- onlyplay
+Criado Video Poker -- evolution
+Criado Scrooge Coins -- onlyplay
+Criado Don Papu Sweet Christmas -- onlyplay
+Criado Instant Super Sic Bo -- evolution
+Criado Crazy Time A -- evolution
+Criado Klasik Blackjack -- evolution
+Criado Blackjack Classic 87 -- evolution
+Criado Blackjack Classic 84 -- evolution
+Criado Extra Chilli Epic Spins -- evolution
+Criado Blackjack Classic 88 -- evolution
+Criado Free Bet Blackjack 1 -- evolution
+Criado Mega Bola -- evolution
+Criado Funky Time -- evolution
+Criado Speed Baccarat 3 -- evolution
+Criado Football Studio Dice -- evolution
+Criado Blackjack Classic 83 -- evolution
+Criado Blackjack Classic 82 -- evolution
+Criado Laplandia Train -- onlyplay
+Criado Thai River Wonders -- pgsoft
+Criado Symbols of Egypt -- pgsoft
+Criado Supermarket Spree -- pgsoft
+Criado Spirited Wonders -- pgsoft
+Criado Speed Winner -- pgsoft
+Criado Shaolin Soccer -- pgsoft
+Criado Secrets of Cleopatra -- pgsoft
+Criado Texas Holdem Bonus Poker -- evolution
+Criado Rooster Rumble -- pgsoft
+Criado Rise of Apollo -- pgsoft
+Criado Rave Party Fever -- pgsoft
+Criado Roulette Lobby -- evolution
+Criado Queen of Bounty -- pgsoft
+Criado Prosperity Fortune Tree -- pgsoft
+Criado Plushie Frenzy -- pgsoft
+Criado Slot Machine -- bgaming
+Criado Blackjack Lobby -- evolution
+Criado Baccarat Lobby -- evolution
+Criado Game Shows Lobby -- evolution
+Criado Snow Giants -- onlyplay
+Criado Triple Card Poker -- evolution
+Criado Raider Jane's Crypt of Fortune -- pgsoft
+Criado Caramelo Jackpot -- onlyplay
+Criado Book of Panda Megaways -- bgaming
+Criado Crazy Time -- evolution
+Criado Blackjack Classic 85 -- evolution
+Criado Bac Bo -- evolution
+Criado Crazy Coin Flip -- evolution
+Criado Super Andar Bahar -- evolution
+Criado Opera Dynasty -- pgsoft
+Criado Blackjack Classic 86 -- evolution
+Criado Wild West Girls -- onlyplay
+Criado Jack Potter Halloween -- onlyplay
+Criado Dream Catcher -- evolution
+Criado Mega Ball -- evolution
+Criado Forest Treasures -- onlyplay
+Criado Don Papu Sweet Halloween -- onlyplay
+Criado Football studio -- evolution
+Criado Cash or Crash -- evolution
+Criado Roulette -- evolution
+Criado Lightning Dice -- evolution
+Criado Ninja vs Samurai -- pgsoft
+Criado Muay Thai Champion -- pgsoft
+Criado Speed Auto Roulette -- evolution
+Criado Western Zombiew -- onlyplay
+Criado Santa's Gift Rush -- pgsoft
+Criado Classic Speed Blackjack 1 -- evolution
+Criado Infinite Blackjack -- evolution
+Criado Blackjack Classic 7 -- evolution
+Criado Blackjack Classic 69 -- evolution
+Criado Blackjack Classic 81 -- evolution
+Criado Blackjack Classic 79 -- evolution
+Criado Blackjack Classic 80 -- evolution
+Criado Blackjack Classic 78 -- evolution
+Criado Blackjack Classic 77 -- evolution
+Criado Baccarat B -- evolution
+Criado Auto Lightning Roulette -- evolution
+Criado Baccarat A -- evolution
+Criado Blackjack Party -- evolution
+Criado Poker Lobby -- evolution
+Criado Double Ball Roulette -- evolution
+Criado Power Blackjack -- evolution
+Criado Free Bet Blackjack -- evolution
+Criado Stock Market -- evolution
+Criado Teen Patti -- evolution
+Criado Speed Baccarat B -- evolution
+Criado Speed Baccarat A -- evolution
+Criado Speed Baccarat E -- evolution
+Criado Speed Baccarat D -- evolution
+Criado Speed Baccarat C -- evolution
+Criado Fan Tan -- evolution
+Criado Classic Speed Blackjack 19 -- evolution
+Criado Classic Speed Blackjack 17 -- evolution
+Criado Chinese Express -- onlyplay
+Criado The Queen's Banquet -- pgsoft
+Criado Fish Store -- onlyplay
+Criado Book of Pinata -- onlyplay
+Criado Retro Party -- onlyplay
+Criado Vampire's Charm -- pgsoft
+Criado Brazil Farm -- onlyplay
+Criado Happy Cookie -- onlyplay
+Criado Joker Coins Megaways -- onlyplay
+Criado Hot & Spicy Megaways -- onlyplay
+Criado Liga Fortuna Megaways -- onlyplay
+Criado Christmas Seven -- onlyplay
+Criado Jack Potter X-MAS -- onlyplay
+Criado Lucky Coin -- onlyplay
+Criado Hot & Spicy Jackpot -- onlyplay
+Criado Troyan Gems -- onlyplay
+Criado Book of Eye -- onlyplay
+Criado Aloha King Elvis -- bgaming
+Criado Lucky Dama Muerta -- bgaming
+Criado Sweet Rush Megaways -- bgaming
+Criado Book Of Cats Megaways -- bgaming
+Criado Lucky Oak -- bgaming
+Criado Lucky 8 Merge Up -- bgaming
+Criado Fruity Book -- onlyplay
+Criado Combo Seven -- onlyplay
+Criado Myths of Bastet -- onlyplay
+Criado Anubis’ Obelisk -- onlyplay
+Criado Joker Coins X-MAS -- onlyplay
+Criado Lucky Punch Megaways -- onlyplay
+Criado Chervona Kalyna Megaways -- onlyplay
+Criado Lucky Punch -- onlyplay
+Criado Royal Kitties -- onlyplay
+Criado Joker Coins -- onlyplay
+Criado Jack Potter -- onlyplay
+Criado Chervona Kalyna -- onlyplay
+Criado Jack Potter Megaways -- onlyplay
+Criado Iggy Racing -- onlyplay
+Criado Hot & Spicy -- onlyplay
+Criado Jungle Gold Megaways -- onlyplay
+Criado Liga Fortuna Megaways PRO -- onlyplay
+Criado Easter Heist -- bgaming
+Criado Mice & Magic Wonder Spin -- bgaming
+Criado Alien Fruits -- bgaming
+Criado Clover Bonanza -- bgaming
+Criado Lucky Crew -- bgaming
+Criado Lucky Farm Bonanza -- bgaming
+Criado Soccermania -- bgaming
+Criado Savage Buffalo Spirit Megaways -- bgaming
+Criado Bonanza Billion -- bgaming
+Criado Hit The Route -- bgaming
+Criado Gift Rush -- bgaming
+Criado Miss Cherry Fruits -- bgaming
+Criado Wild Cash Dice -- bgaming
+Criado Dice Bonanza -- bgaming
+Criado Wild Cash x9990 -- bgaming
+Criado Johnny Cash -- bgaming
+Criado Aztec Magic Megaways -- bgaming
+Criado Beast Band -- bgaming
+Criado Dragon's Gold 100 -- bgaming
+Criado Lady Wolf Moon -- bgaming
+Criado Wild Chicago -- bgaming
+Criado Dice Million -- bgaming
+Criado Road 2 Riches -- bgaming
+Criado Joker Queen -- bgaming
+Criado Fruit Million -- bgaming
+Criado Big Atlantis Frenzy -- bgaming
+Criado Halloween Bonanza -- bgaming
+Criado Savage Buffalo Spirit -- bgaming
+Criado Elvis Frog TRUEWAYS -- bgaming
+Criado Penny Pelican -- bgaming
+Criado Candy Monsta -- bgaming
+Criado Domnitor's Treasure -- bgaming
+Criado Wild Cash -- bgaming
+Criado Luck & Magic -- bgaming
+Criado Aztec Magic Bonanza -- bgaming
+Criado Gold Rush with Johnny Cash -- bgaming
+Criado Gangsterz -- bgaming
+Criado God's Party -- onlyplay
+Criado Jack Potter Deluxe -- onlyplay
+Criado Beer Bonanza -- bgaming
