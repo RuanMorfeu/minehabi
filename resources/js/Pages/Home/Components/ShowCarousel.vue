@@ -24,7 +24,7 @@
                   @slide-start="onSlideStart(index)"
         >
             <Slide v-if="isLoading" v-for="(i, iloading) in 10" :index="iloading">
-                <div  role="status" class="w-full flex items-center justify-center h-48 mr-6 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700 text-4xl">
+                <div  role="status" class="w-full flex items-center justify-center h-48 mr-1 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700 text-4xl">
                     <i class="fa-duotone fa-gamepad-modern"></i>
                 </div>
             </Slide>
@@ -56,12 +56,12 @@ export default {
         return {
             isLoading: false,
             settingsGames: {
-                itemsToShow: 2.5,
+                itemsToShow: 3.2,
                 snapAlign: 'start',
             },
             breakpointsGames: {
                 700: {
-                    itemsToShow: 3.5,
+                    itemsToShow: 4.2,
                     snapAlign: 'center',
                 },
                 1024: {

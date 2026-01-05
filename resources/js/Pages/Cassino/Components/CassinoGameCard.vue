@@ -1,6 +1,6 @@
 <template>
     <RouterLink :to="getRouterLink()" custom v-slot="{ navigate }">
-        <div class="flex text-gray-700 w-full h-auto mr-2 cursor-pointer relative"
+        <div class="flex text-gray-700 w-full h-auto cursor-pointer relative"
              @mouseover="showGameInfo = true"
              @mouseleave="showGameInfo = false"
              @click.prevent="handlePlay(navigate)">
