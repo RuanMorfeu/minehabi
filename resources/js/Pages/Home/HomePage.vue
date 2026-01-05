@@ -40,7 +40,7 @@
                 <br>
                 
                 <!-- Seção Jogos (Habilidade + Mines) -->
-                <div class="flex flex-col lg:flex-row gap-4 mt-8">
+                <div class="flex flex-col lg:flex-row gap-4 mt-4 mb-4">
                     <div class="flex-1">
                         <div class="w-full flex justify-between mb-4">
                             <div class="flex items-center">
@@ -51,7 +51,7 @@
                         </div>
 
                         <!-- Grid de Jogos de Habilidade + Mines -->
-                        <div v-if="allExclusiveGames && allExclusiveGames.length > 0" class="mb-5 bg-white dark:bg-[#1f2937] rounded-lg p-2 shadow-md">
+                        <div v-if="allExclusiveGames && allExclusiveGames.length > 0" class="mb-2 bg-white dark:bg-[#1f2937] rounded-lg p-2 shadow-md">
                             <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                                 <!-- Card do Jogo Mines -->
                                 <div class="relative group cursor-pointer" @click="goToMines">
@@ -96,10 +96,10 @@
                     </div>
                 </div>
 
-                <hr class="my-8 border-gray-300 dark:border-gray-700 opacity-50">
+                <hr class="my-4 border-gray-300 dark:border-gray-700 opacity-50">
 
                 <!-- Seção Slots (PG Soft) -->
-                <div class="flex flex-col gap-4 mt-5 pb-10">
+                <div class="flex flex-col gap-4 mt-2 pb-10">
                     <div class="w-full flex justify-between mb-4">
                         <div class="flex items-center">
                             <h2 class="text-2xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
