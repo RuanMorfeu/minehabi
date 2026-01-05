@@ -3,7 +3,7 @@
 ## Objetivo
 Este arquivo PHP serve como um webhook intermediário para camuflar a URL real do webhook da plataforma dei.bet, adicionando uma camada extra de segurança.
 
-## Configuração no Site Intermediário.
+## Configuração no Site Intermediário
 
 ### 1. Upload do Arquivo
 - Faça upload do arquivo `mollie_webhook_intermediary.php` para seu site intermediário

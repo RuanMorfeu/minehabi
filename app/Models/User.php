@@ -89,6 +89,29 @@ class User extends Authenticatable implements FilamentUser, JWTSubject
         foreach ($withdrawals as $wts) {
             $wts->delete();
         }
+
+        // Limpar tabelas adicionais
+        GameFavorite::where('user_id', $user->id)->delete();
+        GameLike::where('user_id', $user->id)->delete();
+        GameReview::where('user_id', $user->id)->delete();
+        MissionUser::where('user_id', $user->id)->delete();
+        Order::where('user_id', $user->id)->delete();
+        UserAccount::where('user_id', $user->id)->delete();
+        UserDeposit::where('user_id', $user->id)->delete();
+        UserDocument::where('user_id', $user->id)->delete();
+        MinesGame::where('user_id', $user->id)->delete();
+        PopupFreespinRedemption::where('user_id', $user->id)->delete();
+        InfluencerBonusRedemption::where('user_id', $user->id)->delete();
+        SubAffiliate::where('user_id', $user->id)->delete();
+        SuitPayPayment::where('user_id', $user->id)->delete();
+        GGRGames::where('user_id', $user->id)->delete();
+        GGRGamesFiver::where('user_id', $user->id)->delete();
+
+        // Limpar registros onde o usuário é o afiliado (inviter)
+        User::where('inviter', $user->id)->update(['inviter' => null]);
+
+        // Limpar likes recebidos
+        Like::where('liked_user_id', $user->id)->delete();
     }
 
     /*** @return void
