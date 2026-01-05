@@ -1650,22 +1650,6 @@ width: 1.2rem;
 
 .carousel__slide {
     display: flex;
-    padding-right: 0;
-}
-
-.carousel__item {
-    width: 100%;
-    height: 100%;
-}
-
-.carousel__item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}
-.not-last:not(:last-child) {
-    margin-right: 1rem; /* ou o valor desejado para a margem */
 }
 .slide-down {
     transform: translateY(0);

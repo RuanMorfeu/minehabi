@@ -51,8 +51,8 @@
                         </div>
 
                         <!-- Grid de Jogos de Habilidade + Mines -->
-                        <div v-if="allExclusiveGames && allExclusiveGames.length > 0" class="mb-5 bg-white dark:bg-[#1f2937] rounded-lg p-6 shadow-md">
-                            <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                        <div v-if="allExclusiveGames && allExclusiveGames.length > 0" class="mb-5 bg-white dark:bg-[#1f2937] rounded-lg p-2 shadow-md">
+                            <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                                 <!-- Card do Jogo Mines -->
                                 <div class="relative group cursor-pointer" @click="goToMines">
                                     <div class="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
@@ -87,7 +87,7 @@
                         </div>
 
                         <!-- Loading State -->
-                        <div v-if="isLoading" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                        <div v-if="isLoading" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                             <div v-for="i in 5" :key="i" role="status"
                                 class="w-full flex items-center justify-center h-48 bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
                                 <i class="fa-duotone fa-gamepad-modern text-4xl text-gray-400"></i>
@@ -108,8 +108,8 @@
                         </div>
                     </div>
 
-                    <div v-if="pgSlots && pgSlots.length > 0" class="bg-white dark:bg-[#1f2937] rounded-lg p-6 shadow-md">
-                        <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <div v-if="pgSlots && pgSlots.length > 0" class="bg-white dark:bg-[#1f2937] rounded-lg p-2 shadow-md">
+                        <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                             <CassinoGameCard v-for="(game, index) in pgSlots" 
                                 :key="'pg_slot_' + index" 
                                 :index="index" 
@@ -126,7 +126,7 @@
                     </div>
                     
                     <!-- Loading State para Slots -->
-                    <div v-if="isLoading" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <div v-if="isLoading" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                         <div v-for="i in 5" :key="i" role="status"
                             class="w-full flex items-center justify-center h-48 bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
                             <i class="fa-duotone fa-gamepad-modern text-4xl text-gray-400"></i>
