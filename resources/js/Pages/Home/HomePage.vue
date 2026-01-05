@@ -54,19 +54,9 @@
                         <div v-if="allExclusiveGames && allExclusiveGames.length > 0" class="mb-2 bg-white dark:bg-[#1f2937] rounded-lg p-2 shadow-md">
                             <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                                 <!-- Card do Jogo Mines -->
-                                <div class="relative group cursor-pointer" @click="goToMines">
-                                    <div class="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
-                                        <img :src="setting?.mines_cover || '/storage/games/mines/cover.jpg'" alt="Mines" class="w-full h-32 object-cover">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3">
-                                            <h3 class="text-white font-bold text-sm">Mines</h3>
-                                            <p class="text-gray-300 text-xs">Encontre as minas e ganhe!</p>
-                                        </div>
-                                        <div class="absolute top-2 right-2">
-                                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">Novo</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <MinesGameCard 
+                                    :cover="setting?.mines_cover || 'games/mines/cover.jpg'"
+                                    @click="goToMines" />
                                 
                                 <CassinoGameCard v-for="(game, index) in allExclusiveGames" 
                                     :key="'exclusive_' + index" 
@@ -148,6 +138,7 @@ import { RouterLink, useRoute } from "vue-router";
 import { useAuthStore } from "@/Stores/Auth.js";
 import LanguageSelector from "@/Components/UI/LanguageSelector.vue";
 import CassinoGameCard from "@/Pages/Cassino/Components/CassinoGameCard.vue";
+import MinesGameCard from "@/Components/Games/Mines/MinesGameCard.vue";
 import HttpApi from "@/Services/HttpApi.js";
 import ShowCarousel from "@/Pages/Home/Components/ShowCarousel.vue";
 import { useSettingStore } from "@/Stores/SettingStore.js";
@@ -170,6 +161,7 @@ export default {
         LoadingComponent,
         ShowCarousel,
         CassinoGameCard,
+        MinesGameCard,
         Carousel,
         Navigation,
         Slide,
