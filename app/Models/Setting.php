@@ -147,6 +147,9 @@ class Setting extends Model
         // Controle de verificação KYC obrigatória
         'kyc_required',
 
+        // Chance Global de Vitória no Mines
+        'mines_win_chance',
+
     ];
 
     protected $hidden = ['updated_at'];

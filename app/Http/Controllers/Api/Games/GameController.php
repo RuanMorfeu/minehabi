@@ -96,6 +96,7 @@ class GameController extends Controller
 
         $slot_games->transform(function ($game) {
             $game->game_code = str_replace('/', '-', $game->game_code);
+
             return $game;
         });
 

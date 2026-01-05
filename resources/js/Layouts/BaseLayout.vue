@@ -14,8 +14,6 @@
 
     </div>
 
-    <CookiesComponent v-once />
-
     <!-- Gerenciador de pop-ups -->
     <PopupManager />
 
@@ -119,7 +117,6 @@ import NavTopComponent from "@/Components/Nav/NavTopComponent.vue";
 import SideBarComponent from "@/Components/Nav/SideBarComponent.vue";
 import FooterComponent from "@/Components/UI/FooterComponent.vue";
 import BottomNavComponent from "@/Components/Nav/BottomNavComponent.vue";
-import CookiesComponent from "@/Components/UI/CookiesComponent.vue";
 import MissionDaily from "@/Pages/Home/Components/MissionDaily.vue";
 import MissionWeekly from "@/Pages/Home/Components/MissionWeekly.vue";
 import {searchGameStore} from "@/Stores/SearchGameStore.js";
@@ -132,7 +129,6 @@ export default {
     components: {
         MissionWeekly,
         MissionDaily,
-        CookiesComponent,
         BottomNavComponent,
         FooterComponent,
         SideBarComponent,

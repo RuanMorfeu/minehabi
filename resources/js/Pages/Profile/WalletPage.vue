@@ -8,71 +8,77 @@
                 <div class="relative col-span-2">
                     <div v-if="!isLoadingWallet" class="flex flex-col w-full bg-gray-200 hover:bg-gray-300/20 dark:bg-gray-800/50 p-4 rounded hover:dark:bg-gray-900">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                            <div class="flex w-full">
-                                <div class="rounded-full ring-2 ring-gray-200 px-4 py-2 text-center flex justify-center items-center">
-                                    <i class="fa-sharp fa-regular fa-dollar-sign text-2xl"></i>
-                                </div>
-                                <div class="leading-4 ml-3">
-                                    <span>Saldo Total</span>
-                                    <h1 class="text-lg font-bold text-yellow-400">{{ state.currencyFormat(parseFloat(wallet.balance), wallet.currency) }}</h1>
-                                </div>
-                            </div>
-                            <div class="flex w-full">
-                                <div class="rounded-full ring-2 ring-gray-200 px-4 py-2 text-center flex justify-center items-center">
-                                    <i class="fa-sharp fa-regular fa-dollar-sign text-2xl"></i>
-                                </div>
-                                <div class="leading-4 ml-3">
-                                    <span>Saldo de Bônus</span>
-                                    <h1 class="text-lg font-bold text-yellow-400">{{ state.currencyFormat(parseFloat(wallet.balance_bonus), wallet.currency) }}</h1>
-                                </div>
-                            </div>
-                            <div class="flex w-full">
-                                <div class="rounded-full ring-2 ring-gray-200 px-4 py-2 text-center flex justify-center items-center">
-                                    <i class="fa-sharp fa-regular fa-dollar-sign text-2xl"></i>
-                                </div>
-                                <div class="leading-4 ml-3">
-                                    <span>{{ $t('Withdrawal Balance') }}</span>
-                                    <h1 class="text-lg font-bold text-yellow-400">{{ state.currencyFormat(parseFloat(wallet.balance_withdrawal), wallet.currency) }}</h1>
-                                </div>
-                            </div>
-                            <div class="border-2 border-gray-600 col-span-2"></div>
-                            <div v-if="setting.disable_rollover === false || setting.rollover_deposit > 0" class="flex justify-between w-full col-span-2">
-                                <div class="flex w-1/2">
-                                    <div class="rounded-full ring-2 ring-gray-200 px-4 py-2 text-center flex justify-center items-center">
-                                        <i class="fa-sharp fa-regular fa-dollar-sign text-2xl"></i>
+                            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fa-solid fa-dollar-sign text-green-600 dark:text-green-400 text-lg"></i>
                                     </div>
-                                    <div class="leading-4 ml-3">
-                                        <span>Rollover de Deposito</span>
-                                        <h1 class="text-lg font-bold text-yellow-400">{{ state.currencyFormat(parseFloat(wallet.balance_deposit_rollover), wallet.currency) }}</h1>
+                                    <div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400 font-medium">Saldo Total</p>
+                                        <p class="text-xl font-bold text-gray-900 dark:text-white">{{ state.currencyFormat(parseFloat(wallet.balance), wallet.currency) }}</p>
                                     </div>
                                 </div>
-                                <div class="w-1/2">
-                                    <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                                        <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full truncate px-3" :style="{ width: rolloverPercentage(parseFloat(wallet.balance_deposit_rollover))   }">
-                                            {{ rolloverPercentage(parseFloat(wallet.balance_deposit_rollover)) }}%
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fa-solid fa-gift text-yellow-600 dark:text-yellow-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400 font-medium">Saldo de Bônus</p>
+                                        <p class="text-xl font-bold text-gray-900 dark:text-white">{{ state.currencyFormat(parseFloat(wallet.balance_bonus), wallet.currency) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fa-solid fa-money-bill-transfer text-blue-600 dark:text-blue-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400 font-medium">{{ $t('Withdrawal Balance') }}</p>
+                                        <p class="text-xl font-bold text-gray-900 dark:text-white">{{ state.currencyFormat(parseFloat(wallet.balance_withdrawal), wallet.currency) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-300 dark:border-gray-600 col-span-2 mt-6 mb-6"></div>
+                            <div v-if="setting.disable_rollover === false || setting.rollover_deposit > 0" class="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 col-span-2">
+                                <div class="mb-4">
+                                    <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-2">Rollover de Depósito</h3>
+                                    <p class="text-2xl font-bold text-purple-600 dark:text-purple-400">{{ state.currencyFormat(parseFloat(wallet.balance_deposit_rollover), wallet.currency) }}</p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Progresso</span>
+                                        <span class="text-sm font-medium text-purple-600 dark:text-purple-400">{{ rolloverPercentage(parseFloat(wallet.balance_deposit_rollover)) }}%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                        <div class="bg-purple-600 h-2 rounded-full transition-all duration-300" :style="{ width: rolloverPercentage(parseFloat(wallet.balance_deposit_rollover)) }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="setting.disable_rollover === false || setting.rollover > 0" class="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 col-span-2">
+                                <div class="mb-4">
+                                    <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-2">Rollover de Bônus</h3>
+                                    <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">{{ state.currencyFormat(parseFloat(wallet.balance_bonus_rollover), wallet.currency) }}</p>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm text-gray-600 dark:text-gray-400">Barra de Rollover</span>
+                                            <span class="text-sm font-medium text-yellow-600 dark:text-yellow-400">{{ rolloverPercentage(parseFloat(wallet.balance_bonus_rollover)) }}%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                            <div class="bg-yellow-600 h-2 rounded-full transition-all duration-300" :style="{ width: rolloverPercentage(parseFloat(wallet.balance_bonus_rollover)) }"></div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div v-if="setting.disable_rollover === false || setting.rollover > 0" class="flex justify-between w-full col-span-2">
-                               <div class="flex w-1/2">
-                                   <div class="rounded-full ring-2 ring-gray-200 px-4 py-2 text-center flex justify-center items-center">
-                                       <i class="fa-sharp fa-regular fa-dollar-sign text-2xl"></i>
-                                   </div>
-                                   <div class="leading-4 ml-3">
-                                       <span>Rollover de Bônus</span>
-                                       <h1 class="text-lg font-bold text-yellow-400">{{ state.currencyFormat(parseFloat(wallet.balance_bonus_rollover), wallet.currency) }}</h1>
-                                   </div>
-                               </div>
-                                <div class="w-1/2">
-                                    <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 mb-1">
-                                        <div class="flex bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full truncate px-3" :style="{ width: rolloverPercentage(parseFloat(wallet.balance_bonus_rollover))   }">
-                                            {{ rolloverPercentage(parseFloat(wallet.balance_bonus_rollover)) }}% - Barra de Rollover
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-sm text-gray-600 dark:text-gray-400">Barra de Proteção</span>
+                                            <span class="text-sm font-medium text-red-600 dark:text-red-400">{{ rolloverPercentage(parseFloat(setting.rollover_protection)) }}%</span>
                                         </div>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                                        <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full truncate px-3" :style="{ width: rolloverPercentage(parseFloat(setting.rollover_protection))   }">
-                                            {{ rolloverPercentage(parseFloat(setting.rollover_protection)) }} - Barra de Proteção
+                                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                            <div class="bg-red-600 h-2 rounded-full transition-all duration-300" :style="{ width: rolloverPercentage(parseFloat(setting.rollover_protection)) }"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -98,29 +104,6 @@
                                     <p class="text-sm dark:text-gray-500">Clique aqui para ver suas transações</p>
                                 </div>
                             </a>
-                            <!-- Card de Verificação Simplificado - Aparece se KYC for obrigatório (individual tem prioridade) -->
-                            <a v-if="!checkingKyc && ((user && user.kyc_required !== undefined) ? user.kyc_required : (setting && setting.kyc_required))" @click.prevent="$router.push('/profile/verification')" href="" class="flex bg-white dark:bg-gray-900 p-4 border border-gray-300 dark:border-gray-600 rounded-lg">
-                                <div class="text-5xl mr-3">
-                                    <i v-if="isKycApproved" class="fa-sharp fa-light fa-shield-check"></i>
-                                    <i v-else class="fa-sharp fa-light fa-id-card"></i>
-                                </div>
-                                <div class="flex flex-col">
-                                    <h1 v-if="isKycApproved" class="text-lg">Verificação Completa</h1>
-                                    <h1 v-else class="text-lg">Verificação</h1>
-                                    <p v-if="isKycApproved" class="text-sm dark:text-gray-500">Documentos aprovados com sucesso</p>
-                                    <p v-else class="text-sm dark:text-gray-500">Clique aqui para verificar seus documentos</p>
-                                </div>
-                            </a>
-                            <!-- Loading de Verificação - Aparece se KYC for obrigatório (individual tem prioridade) -->
-                            <div v-if="checkingKyc && ((user && user.kyc_required !== undefined) ? user.kyc_required : (setting && setting.kyc_required))" class="flex bg-white dark:bg-gray-900 p-4 border border-gray-300 dark:border-gray-600 rounded-lg">
-                                <div class="text-5xl mr-3">
-                                    <i class="fa-sharp fa-light fa-spinner fa-spin"></i>
-                                </div>
-                                <div class="flex flex-col">
-                                    <h1 class="text-lg">Verificando Status</h1>
-                                    <p class="text-sm dark:text-gray-500">Verificando status dos seus documentos...</p>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="mt-5 flex flex-col">

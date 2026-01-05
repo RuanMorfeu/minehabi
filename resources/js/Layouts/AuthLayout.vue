@@ -18,12 +18,11 @@ import NavTopComponent from "@/Components/Nav/NavTopComponent.vue";
 import SideBarComponent from "@/Components/Nav/SideBarComponent.vue";
 import FooterComponent from "@/Components/UI/FooterComponent.vue";
 import BottomNavComponent from "@/Components/Nav/BottomNavComponent.vue";
-import CookiesComponent from "@/Components/UI/CookiesComponent.vue";
 import { useRoute } from "vue-router";
 
 export default {
     props: ['simple'],
-    components: {CookiesComponent, BottomNavComponent, FooterComponent, SideBarComponent, NavTopComponent },
+    components: {BottomNavComponent, FooterComponent, SideBarComponent, NavTopComponent },
     data() {
         return {
             logo: '/assets/images/logo_white.png',

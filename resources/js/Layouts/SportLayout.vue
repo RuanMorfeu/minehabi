@@ -22,12 +22,10 @@ import NavTopComponent from "@/Components/Nav/NavTopComponent.vue";
 import SideBarComponent from "@/Components/Nav/SideBarComponent.vue";
 import FooterComponent from "@/Components/UI/FooterComponent.vue";
 import BottomNavComponent from "@/Components/Nav/BottomNavComponent.vue";
-import CookiesComponent from "@/Components/UI/CookiesComponent.vue";
 
 export default {
     props: [],
     components: {
-        CookiesComponent,
         BottomNavComponent,
         FooterComponent,
         SideBarComponent,

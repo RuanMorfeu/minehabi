@@ -1345,7 +1345,9 @@ function restartPaymentModal() {
                                         v-model="form.amount"
                                         :min="setting.min_deposit" 
                                         :max="setting.max_deposit" 
-                                        pattern="\d*" />
+                                        step="0.01"
+                                        type="number"
+                                        inputmode="decimal" />
                                     <div v-if="errors.amount" class="mt-2 text-sm text-red-600 dark:text-red-500">
                                         {{ errors.amount }}
                                     </div>

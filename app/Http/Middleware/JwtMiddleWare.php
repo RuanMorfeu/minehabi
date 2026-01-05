@@ -14,9 +14,15 @@ class JWTMiddleWare
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth('api')->check()) {
-            return $next($request);
+        try {
+            if (auth('api')->check()) {
+                return $next($request);
+            }
+        } catch (\Exception $e) {
+            \Log::error('JWT Auth Error: '.$e->getMessage());
         }
+
+        \Log::warning('JWT Auth Failed. Token: '.$request->bearerToken());
 
         return response()->json(['error' => 'unauthenticated'], 401);
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\InfluencerBonusController;
 use App\Http\Controllers\Api\Wallet\DepositController;
+use App\Http\Controllers\Games\MinesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+/*
+ * Mines Game API Routes
+ */
+Route::middleware(['auth.jwt'])->prefix('mines')->group(function () {
+    Route::post('start', [MinesController::class, 'startGame']);
+    Route::post('reveal', [MinesController::class, 'revealCell']);
+    Route::post('cashout', [MinesController::class, 'cashout']);
 });
 
 /*

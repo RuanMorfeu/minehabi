@@ -198,6 +198,19 @@ class DefaultSetting extends Page implements HasForms
                             ->helperText('Quando desabilitado, usuários podem sacar sem verificação de documentos')
                             ->inline(false),
                     ])->columns(1),
+                Section::make('Configurações de Jogos')
+                    ->description('Configurações globais para os jogos')
+                    ->schema([
+                        TextInput::make('mines_win_chance')
+                            ->label('Chance Global de Vitória no Mines (%)')
+                            ->helperText('Defina a porcentagem global de chance de vitória (0-100). Usado se o usuário não tiver configuração específica. Se ambos nulos = Aleatório.')
+                            ->numeric()
+                            ->minValue(0)
+                            ->maxValue(100)
+                            ->suffix('%')
+                            ->nullable()
+                            ->placeholder('Aleatório (Padrão)'),
+                    ])->columns(1),
             ])
             ->statePath('data');
     }

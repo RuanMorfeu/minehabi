@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Profile\WalletController;
 use App\Http\Controllers\Api\Providers\VGamesController;
+use App\Http\Controllers\Games\MinesController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -74,6 +75,9 @@ Route::get('/d9dVHha05FEf4cH1r1F4', [\App\Http\Controllers\PublicMetricsControll
 
 // Rota para download de arquivos ZIP
 Route::get('/download-zip', [\App\Http\Controllers\DownloadController::class, 'downloadZip'])->name('download.zip');
+
+// Rotas do jogo Mines
+Route::get('/mines', [MinesController::class, 'index'])->name('games.mines');
 
 // GAMES PROVIDER
 // include_once(__DIR__ . '/groups/provider/apiPragmatic40.php');

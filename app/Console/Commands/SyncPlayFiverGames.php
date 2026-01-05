@@ -7,7 +7,6 @@ use App\Models\GamesKey;
 use App\Models\Provider;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
 
 class SyncPlayFiverGames extends Command
 {
@@ -34,8 +33,9 @@ class SyncPlayFiverGames extends Command
 
         // Obter credenciais da PlayFiver
         $gamesKey = GamesKey::first();
-        if (!$gamesKey || !$gamesKey->playfiver_token || !$gamesKey->playfiver_secret) {
+        if (! $gamesKey || ! $gamesKey->playfiver_token || ! $gamesKey->playfiver_secret) {
             $this->error('Credenciais da PlayFiver não encontradas!');
+
             return 1;
         }
 
@@ -49,23 +49,25 @@ class SyncPlayFiverGames extends Command
             'secretKey' => $gamesKey->playfiver_secret,
         ]);
 
-        if (!$response->successful()) {
-            $this->error('Falha ao buscar jogos da API PlayFiver: ' . $response->status());
+        if (! $response->successful()) {
+            $this->error('Falha ao buscar jogos da API PlayFiver: '.$response->status());
+
             return 1;
         }
 
         $data = $response->json();
-        
-        if (!isset($data['data']) || empty($data['data'])) {
+
+        if (! isset($data['data']) || empty($data['data'])) {
             $this->error('Nenhum jogo encontrado na resposta da API!');
+
             return 1;
         }
-        
+
         $games = $data['data'];
 
         // Garantir que o provedor PlayFiver exista
         $provider = Provider::firstOrCreate([
-            'code' => 'play_fiver'
+            'code' => 'play_fiver',
         ], [
             'name' => 'PlayFiver',
             'status' => 1,
@@ -76,25 +78,26 @@ class SyncPlayFiverGames extends Command
 
         foreach ($games as $gameData) {
             // Verificar se é do provedor OFICIAL - PG SOFT
-            if (!isset($gameData['provider']['name']) || $gameData['provider']['name'] !== 'OFICIAL - PG SOFT') {
+            if (! isset($gameData['provider']['name']) || $gameData['provider']['name'] !== 'OFICIAL - PG SOFT') {
                 continue;
             }
-            
+
             // Extrair dados do jogo
             $gameCode = $gameData['game_code'] ?? null;
             $gameName = $gameData['name'] ?? 'Jogo sem nome';
             $imageUrl = $gameData['image_url'] ?? null;
 
-            if (!$gameCode) {
+            if (! $gameCode) {
                 $this->warn("Jogo sem código ignorado: {$gameName}");
+
                 continue;
             }
 
             // Buscar ou criar o jogo
             $game = Game::where('game_code', $gameCode)->first();
 
-            if (!$game) {
-                $game = new Game();
+            if (! $game) {
+                $game = new Game;
                 $game->game_code = $gameCode;
                 $game->distribution = 'play_fiver';
                 $game->status = 1;
@@ -106,7 +109,7 @@ class SyncPlayFiverGames extends Command
 
             // Atualizar dados
             $game->game_name = $gameName;
-            
+
             // Definir URL da imagem
             if ($imageUrl) {
                 // Se for URL completa, usar diretamente
@@ -115,8 +118,8 @@ class SyncPlayFiverGames extends Command
                     $game->home_cover = $imageUrl;
                 } else {
                     // Se for path relativo, montar URL completa
-                    $game->cover = 'https://api.playfivers.com/' . ltrim($imageUrl, '/');
-                    $game->home_cover = 'https://api.playfivers.com/' . ltrim($imageUrl, '/');
+                    $game->cover = 'https://api.playfivers.com/'.ltrim($imageUrl, '/');
+                    $game->home_cover = 'https://api.playfivers.com/'.ltrim($imageUrl, '/');
                 }
             }
 

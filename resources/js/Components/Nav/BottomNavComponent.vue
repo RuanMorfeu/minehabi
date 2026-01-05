@@ -1,63 +1,60 @@
 <template>
-    <div class="flex sm:hidden">
-        <div class="fixed z-60 w-full navtop-color h-16 -translate-x-1/2 bg-white border-t-1 border-t border-gray-700 bottom-0 left-1/2" style="z-index: 60;">
-            <div class="grid h-full grid-cols-5 mx-auto">
-                <button @click.prevent="toggleMenu" data-tooltip-target="tooltip-menu" type="button" class="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
-    <i :class="isMenuOpen ? 'fa-regular fa-circle-xmark mb-1 text-xl' : 'fa-solid fa-bars mb-1 text-xl'" style="color : #2563EB;"></i>
-    <span class="text-[12px]">Menu</span>
-</button>
-                <div id="tooltip-menu" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    Menu
-                    <div class="tooltip-arrow" data-popper-arrow></div>
+    <div class="fixed bottom-4 left-4 right-4 z-50 sm:hidden">
+        <!-- Barra flutuante com efeito glassmorphism -->
+        <div class="flex items-center justify-between px-2 py-3 bg-gray-900/90 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-700/50">
+            
+            <!-- Botão Menu (Movido para o início) -->
+            <button @click.prevent="toggleMenu" class="flex flex-col items-center justify-center w-full group">
+                <div class="p-1 transition-all duration-300 rounded-xl group-hover:bg-white/10 group-active:scale-95">
+                    <i :class="isMenuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'" class="text-xl text-gray-400 group-hover:text-green-500 transition-colors"></i>
                 </div>
-                <button @click="$router.push('/profile/affiliate')" data-tooltip-target="tooltip-affiliate" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                    <i class="fa-duotone fa-users mb-1 text-xl" style="--fa-primary-color: #3B82F6; --fa-secondary-color: #1D4ED8;"></i>
-                    <span class="text-[12px]">Afiliados</span>
-                </button>
-                <div id="tooltip-affiliate" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    Afiliados
-                    <div class="tooltip-arrow" data-popper-arrow></div>
+                <span class="text-[10px] font-medium text-gray-400 group-hover:text-green-500 transition-colors">Menu</span>
+            </button>
+
+            <!-- Botão Slots -->
+            <button @click="$router.push('/casino/provider/all/category/slots')" class="flex flex-col items-center justify-center w-full group">
+                <div class="p-1 transition-all duration-300 rounded-xl group-hover:bg-white/10 group-active:scale-95">
+                    <i class="fa-duotone fa-gamepad-modern text-xl text-gray-400 group-hover:text-purple-500 transition-colors"></i>
                 </div>
-                <div class="flex items-center justify-center">
-                    <button @click.prevent="openDepositModal" data-tooltip-target="tooltip-new" type="button" class="inline-flex items-center justify-center w-[50px] h-[50px] font-medium bg-gradient-to-b from-[#3B82F6] to-[#1D4ED8] rounded-lg hover:bg-gradient-to-b from-[#3B82F6] to-[#1D4ED8] group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800 text-[20px]">
-                        <i class="fa-solid fa-euro-sign fa-beat-fade text-white"></i>
-                        <span class="sr-only">{{ $t('Deposit') }}</span>
-                    </button>
+                <span class="text-[10px] font-medium text-gray-400 group-hover:text-purple-500 transition-colors">Slots</span>
+            </button>
+
+            <!-- Botão Central de Depósito (Destaque) -->
+            <button @click.prevent="openDepositModal" class="flex flex-col items-center justify-center w-full group">
+                <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full shadow-lg shadow-blue-900/50 transform transition-transform hover:scale-110 active:scale-95">
+                    <i class="fa-solid fa-plus text-xl text-white"></i>
                 </div>
-                <div id="tooltip-new" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    {{ $t('New Deposit') }}
-                    <div class="tooltip-arrow" data-popper-arrow></div>
+                <span class="text-[10px] font-medium text-gray-400 group-hover:text-blue-500 transition-colors">Depositar</span>
+            </button>
+
+            <!-- Botão Carteira (Substitui Ao Vivo) -->
+            <button @click="$router.push('/profile/wallet')" class="flex flex-col items-center justify-center w-full group">
+                <div class="p-1 transition-all duration-300 rounded-xl group-hover:bg-white/10 group-active:scale-95">
+                    <i class="fa-duotone fa-wallet text-xl text-gray-400 group-hover:text-red-500 transition-colors"></i>
                 </div>
-                <button @click="$router.push('/casino/provider/all/category/slots')" data-tooltip-target="tooltip-slots" type="button" class="inline-flex flex-col items-center justify-center px-5 rounded-r-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                    <i class="fa-duotone fa-cherries mb-1 text-xl"style="--fa-primary-color: #3B82F6; --fa-secondary-color: #1D4ED8;"></i>
-                    <span class="text-[12px]">Slots</span>
-                </button>
-                <div id="tooltip-slots" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    Slots
-                    <div class="tooltip-arrow" data-popper-arrow></div>
+                <span class="text-[10px] font-medium text-gray-400 group-hover:text-red-500 transition-colors">Carteira</span>
+            </button>
+
+            <!-- Botão Início (Movido para o final) -->
+            <button @click="$router.push('/')" class="flex flex-col items-center justify-center w-full group">
+                <div class="p-1 transition-all duration-300 rounded-xl group-hover:bg-white/10 group-active:scale-95">
+                    <i class="fa-duotone fa-house text-xl text-gray-400 group-hover:text-blue-500 transition-colors"></i>
                 </div>
-                <button @click="$router.push('/profile/wallet')" data-tooltip-target="tooltip-wallet" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                    <i class="fa-duotone fa-wallet mb-1 text-xl"style="--fa-primary-color: #3B82F6; --fa-secondary-color: #1D4ED8;"></i>
-                    <span class="text-[12px]">{{ $t('Wallet') }}</span>
-                </button>
-                <div id="tooltip-wallet" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    {{ $t('Wallet') }}
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-            </div>
+                <span class="text-[10px] font-medium text-gray-400 group-hover:text-blue-500 transition-colors">Início</span>
+            </button>
         </div>
     </div>
 
-    <!-- Modal de depósito original -->
+    <!-- Modal de depósito original (Mantido a lógica, apenas ajustado o z-index se necessário) -->
     <div
         id="modalElDeposit"
         tabindex="-1"
         class="fixed top-0 left-0 right-0 hidden w-full overflow-x-hidden overflow-y-auto md:inset-0"
-        style="min-height: 100vh; z-index: 45;"
+        style="min-height: 100vh; z-index: 60;"
         aria-modal="true"
     >
-        <div class="relative w-full max-w-2xl">
-            <div class="flex flex-col px-6 pb-8 my-auto md:justify-between bg-white dark:bg-[#17181b] rounded-lg shadow-lg">
+        <div class="relative w-full max-w-2xl h-full md:h-auto">
+            <div class="flex flex-col px-6 pb-8 my-auto md:justify-between bg-white dark:bg-[#17181b] rounded-lg shadow-lg relative">
                 <div class="flex justify-between mt-6 mb-6 modal-header">
                     <div>
                         <h1 class="text-xl font-bold">{{ $t("Deposit") }}</h1>
@@ -170,11 +167,16 @@ export default {
         
         // Manipulador de clique fora do modal
         handleOutsideClick(event) {
-            const modalContent = document.querySelector('#modalElDeposit .flex-col');
-            const modalBackdrop = document.querySelector('.fixed.inset-0.z-40');
+            // Verifica se o modal está visível antes de tentar fechar
+            const modalElement = document.querySelector('#modalElDeposit');
+            if (!modalElement || modalElement.classList.contains('hidden')) {
+                return;
+            }
+
+            const modalContent = document.querySelector('#modalElDeposit .relative.w-full');
             
-            // Se o clique foi no backdrop (fora do conteúdo do modal)
-            if (modalBackdrop && event.target === modalBackdrop) {
+            // Se o clique foi fora do conteúdo do modal
+            if (modalContent && !modalContent.contains(event.target)) {
                 // Fecha o modal
                 this.closeModal();
                 
@@ -188,11 +190,13 @@ export default {
             // Inicializa o modal de depósito usando Flowbite
             const $modalElement = document.querySelector('#modalElDeposit');
             
+            if (!$modalElement) return;
+
             // Configurações do modal com melhorias de acessibilidade
             this.modalDeposit = new Modal($modalElement, {
                 placement: 'center',
                 backdrop: 'dynamic',
-                backdropClasses: "bg-gray-900\/50 dark:bg-gray-900\/80 fixed inset-0 z-[44]",
+                backdropClasses: "bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-[55]",
                 closable: true,
                 onHide: () => {
                     this.paymentType = null;
@@ -214,5 +218,17 @@ export default {
 </script>
 
 <style scoped>
+/* Animação suave para os ícones */
+i {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
+button:active i {
+    transform: scale(0.9);
+}
+
+/* Ajuste para o botão central flutuante */
+.fa-plus {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
 </style>

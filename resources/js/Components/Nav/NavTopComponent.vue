@@ -93,14 +93,6 @@
                                             {{ $t('Dashboard') }}
                                         </RouterLink>
                                     </li>
-                                    <li>
-                                        <RouterLink :to="{ name: 'profileAffiliate' }" active-class="profile-menu-active" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
-                                            <span class="w-8 h-8 mr-3">
-                                                <i class="fa-duotone fa-people-group"></i>
-                                            </span>
-                                            {{ $t('Affiliate') }}
-                                        </RouterLink>
-                                    </li>
 
                                     <li>
                                         <RouterLink :to="{ name: 'profileWithdraw' }" active-class="profile-menu-active" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -117,14 +109,6 @@
                                             </span>
                                             {{ $t('My Wallet') }}
                                         </RouterLink>
-                                    </li>
-                                    <li>
-                                        <a href="#" @click.prevent="profileToggle" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
-                                            <span class="w-8 h-8 mr-3">
-                                               <i class="fa-regular fa-id-card-clip"></i>
-                                            </span>
-                                            {{ $t('My Profile') }}
-                                        </a>
                                     </li>
                                     <li>
                                         <a @click.prevent="logoutAccount" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">

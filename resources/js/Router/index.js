@@ -37,6 +37,7 @@ import DemoPlayModal from "@/Pages/Web/Casino/DemoPlayModal.vue";
 import DemoPlayModal2 from "@/Pages/Web/Casino/DemoPlayModal2.vue";
 import VerificationPage from "@/Pages/Profile/VerificationPage.vue";
 import { component } from "vue-fullscreen";
+import GamesMines from "@/Pages/Games/Mines.vue";
 
 export const routes = [
     {
@@ -260,6 +261,12 @@ export const routes = [
         name: 'demoPlayModal2',
         path: '/demo-play2/:gameId?/:type?/:valor?',
         component: DemoPlayModal2
+    },
+    {
+        name: 'games.mines',
+        path: '/mines',
+        component: GamesMines,
+        meta: { auth: true }
     }
 ];
 

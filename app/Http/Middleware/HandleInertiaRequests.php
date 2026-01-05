@@ -15,7 +15,7 @@ class HandleInertiaRequests extends Middleware
      *
      * @var string
      */
-    protected $rootView = 'app';
+    protected $rootView = 'layouts.app';
 
     /**
      * Determines the current asset version.
@@ -39,7 +39,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             // Compartilha as configurações do novo sistema de bônus de influencer com o frontend
             'bonus_settings' => fn () => Cache::remember('active_influencer_bonuses', 3600, function () {
-                // Retorna os bônus de influencer ativos do novo sistema
+                // Retorna os bônos de influencer ativos do novo sistema
                 return \App\Models\InfluencerBonus::where('is_active', true)->get();
             }),
         ]);

@@ -163,8 +163,18 @@ app.use(pinia);
 
 app.use(i18nVue, {
     resolve: async lang => {
-        const langs = import.meta.glob('../../lang/*.json');
-        return await langs[`../../lang/${lang}.json`]();
+        try {
+            const langs = import.meta.glob('../../lang/*.json', { eager: false });
+            const loader = langs[`../../lang/${lang}.json`];
+            if (!loader) {
+                console.warn(`Language file ${lang}.json not found`);
+                return {};
+            }
+            return await loader();
+        } catch (error) {
+            console.error(`Error loading language ${lang}:`, error);
+            return {};
+        }
     }
 });
 
