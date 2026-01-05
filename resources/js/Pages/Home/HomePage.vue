@@ -54,9 +54,14 @@
                         <div v-if="allExclusiveGames && allExclusiveGames.length > 0" class="mb-2 bg-white dark:bg-[#1f2937] rounded-lg p-2 shadow-md">
                             <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                                 <!-- Card do Jogo Mines -->
-                                <MinesGameCard 
-                                    :cover="setting?.mines_cover || 'games/mines/cover.jpg'"
-                                    @click="goToMines" />
+                                <div class="relative" @click="goToMines">
+                                    <CassinoGameCard 
+                                        :index="-1"
+                                        :game="{ game_name: 'Mines', game_code: 'mines', distribution: 'external', cover: setting?.mines_cover || 'games/mines/cover.jpg' }"
+                                        :useHomeCover="true"
+                                        :show-demo-button="false"
+                                        @click.stop.prevent />
+                                </div>
                                 
                                 <CassinoGameCard v-for="(game, index) in allExclusiveGames" 
                                     :key="'exclusive_' + index" 
