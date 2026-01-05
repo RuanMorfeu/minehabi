@@ -57,7 +57,7 @@
                                 <div class="relative" @click="goToMines">
                                     <CassinoGameCard 
                                         :index="-1"
-                                        :game="{ game_name: 'Mines', game_code: 'mines', distribution: 'external', cover: setting?.mines_cover || 'games/mines/cover.jpg' }"
+                                        :game="{ id: 'mines', game_name: 'Mines', game_code: 'mines', distribution: 'external', cover: setting?.mines_cover || 'games/mines/cover.jpg' }"
                                         :useHomeCover="true"
                                         :show-demo-button="false"
                                         @click.stop.prevent />
