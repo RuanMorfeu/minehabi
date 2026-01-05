@@ -22,6 +22,11 @@ export default defineConfig({
     },
     build: {
         chunkSizeWarningLimit: 2024,
+        rollupOptions: {
+            external: [
+                '/resources/assets/images/mines-cover.png'
+            ]
+        }
     },
     optimizeDeps: {
         esbuildOptions: {

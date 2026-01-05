@@ -56,7 +56,7 @@
                                 <!-- Card do Jogo Mines -->
                                 <div class="relative group cursor-pointer" @click="goToMines">
                                     <div class="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
-                                        <img :src="getCover(setting?.mines_cover || 'games/mines/cover.jpg')" alt="Mines" class="w-full h-32 object-cover">
+                                        <img src="/resources/assets/images/mines-cover.png" alt="Mines" class="w-full h-32 object-cover">
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                                         <div class="absolute bottom-0 left-0 right-0 p-3">
                                             <h3 class="text-white font-bold text-sm">Mines</h3>
@@ -148,7 +148,6 @@ import { RouterLink, useRoute } from "vue-router";
 import { useAuthStore } from "@/Stores/Auth.js";
 import LanguageSelector from "@/Components/UI/LanguageSelector.vue";
 import CassinoGameCard from "@/Pages/Cassino/Components/CassinoGameCard.vue";
-import MinesGameCard from "@/Components/Games/Mines/MinesGameCard.vue";
 import HttpApi from "@/Services/HttpApi.js";
 import ShowCarousel from "@/Pages/Home/Components/ShowCarousel.vue";
 import { useSettingStore } from "@/Stores/SettingStore.js";
@@ -171,7 +170,6 @@ export default {
         LoadingComponent,
         ShowCarousel,
         CassinoGameCard,
-        MinesGameCard,
         Carousel,
         Navigation,
         Slide,
@@ -416,17 +414,6 @@ export default {
             if (!this.lastWinnersToastTimer) return;
             window.clearInterval(this.lastWinnersToastTimer);
             this.lastWinnersToastTimer = null;
-        },
-
-        getCover(slug) {
-            if (!slug) {
-                return '';
-            }
-            
-            if (slug.startsWith('http')) {
-                return slug;
-            }
-            return '/storage/' + slug;
         },
 
         getRandomNumber(min, max) {
