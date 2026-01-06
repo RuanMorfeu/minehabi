@@ -71,17 +71,17 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <a @click.prevent="$router.push('/forgot-password')" href="" class="text-white text-sm">{{ $t('Forgot password') }}</a>
+                                    <a @click.prevent="$router.push('/forgot-password')" href="" class="text-black text-sm">{{ $t('Forgot password') }}</a>
 
                                     <div class="mt-5 w-full">
                                         <button type="submit" class="ui-button-blue rounded w-full py-3 mb-3 text-lg font-bold">
                                             {{ $t('Entrar') }}
                                         </button>
                                     </div>
-                                    <p class="text-sm text-gray-300 mb-6">
+                                    <p class="text-sm text-black mb-6">
                                         {{ $t('Not have an account yet') }}?
                                         <RouterLink :to="{ name: 'register' }" active-class="top-register-active" class="">
-                                            <strong>{{ $t('Create an account') }}</strong>
+                                            <strong class="text-black">{{ $t('Create an account') }}</strong>
                                         </RouterLink>
                                     </p>
                                 </form>

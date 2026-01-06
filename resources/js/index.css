@@ -436,11 +436,10 @@ body{
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
-    color: #2563EB;
 }
 
 .snake-auth-modal .snake-auth-links a {
-    color: #2563EB;
+    color: #000000;
     text-decoration: none;
 }
 

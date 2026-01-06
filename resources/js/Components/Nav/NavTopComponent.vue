@@ -305,7 +305,7 @@
                             </div>
                             <a
                                 href="/forgot-password"
-                                class="text-white text-sm"
+                                class="text-black text-sm"
                                 >{{ $t("Forgot password") }}</a
                             >
 
@@ -318,8 +318,8 @@
                                 </button>
                             </div>
                             <div class="snake-auth-links">
-                                <a href="" @click.prevent="hideLoginShowRegisterToggle"><strong>Criar conta</strong></a>
-                                <a href="/forgot-password">{{ $t("Forgot password") }}</a>
+                                <a href="" @click.prevent="hideLoginShowRegisterToggle" class="text-black"><strong>Criar conta</strong></a>
+                                <a href="/forgot-password" class="text-black">{{ $t("Forgot password") }}</a>
                             </div>
                         </div>
                     </form>              </div>
@@ -474,7 +474,7 @@
                                     <div
                                         class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none"
                                     >
-                                        <span class="text-blue-600 font-bold" style="z-index: 1;">+351</span>
+                                        <span class="text-blue-600 font-bold snake-reset-font" style="z-index: 1;">+351</span>
                                     </div>
                                     <input
                                         type="text"
@@ -482,13 +482,12 @@
                                         v-model="registerForm.phone"
                                         @input="validatePhone"
                                         :class="{
-                                            'snake-auth-input ps-16': !phoneError,
-                                            'snake-auth-input ps-16 border-red-500 focus:ring-red-500 focus:border-red-500': phoneError
+                                            'snake-auth-input !pl-16 !mt-0 text-sm snake-reset-font': !phoneError,
+                                            'snake-auth-input !pl-16 !mt-0 text-sm border-red-500 focus:ring-red-500 focus:border-red-500 snake-reset-font': phoneError
                                         }"
                                         placeholder="Telemóvel"
                                         maxlength="9"
                                         pattern="\d*"
-                                        :placeholder="$t('Enter your phone')"
                                         required
                                     />
                                 </div>
@@ -577,7 +576,7 @@
                                 </button>
                                 
                                 <div class="snake-auth-links">
-                                    <a href="" @click.prevent="hideRegisterShowLoginToggle" class="font-medium"><strong>{{ $t('Faça login') }}</strong></a>
+                                    <a href="" @click.prevent="hideRegisterShowLoginToggle" class="font-medium text-black"><strong>{{ $t('Faça login') }}</strong></a>
                                 </div>
                             </div>
                         </div>

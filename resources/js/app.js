@@ -205,4 +205,4 @@ if(localStorage.getItem('token')) {
     })()
 }
 
-app.mount('#ganhoubet');
+app.mount('#deibet');
