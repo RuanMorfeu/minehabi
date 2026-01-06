@@ -6,7 +6,7 @@
       :disabled="jogo.estadojogo == 'iniciou'"
     >
       <option
-        v-for="numero in jogo.numeros.filter(n => n < 20)"
+        v-for="numero in jogo.numeros.filter(n => n < 24)"
         :key="numero"
         :value="numero + 1"
       >

@@ -16,7 +16,7 @@
             :disabled="jogo.estadojogo == 'iniciou'"
           >
             <option
-              v-for="numero in jogo.numeros.filter(n => n < 20)"
+              v-for="numero in jogo.numeros.filter(n => n < 24)"
               :key="numero"
               :value="numero + 1"
             >
@@ -70,11 +70,11 @@
     <!-- Barra Inferior Mobile Fixa -->
     <div class="barra-inferior-mobile">
       <div class="grupo-esquerda">
-        <button class="btn-mines-menu">
-          MINES
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m6 9 6 6 6-6"/>
+        <button class="btn-voltar" @click="$router.go(-1)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"/>
           </svg>
+          Voltar
         </button>
         <button class="btn-ajuda">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -90,7 +90,7 @@
           +{{ Number(jogo.valorCashOut).toFixed(2) }} EUR
         </div>
         <div class="info-saldo">
-          <span class="valor-saldo">{{ (wallet && wallet.balance != null) ? Number(wallet.balance).toFixed(2) : Number(jogo.saldo).toFixed(2) }}</span>
+          <span class="valor-saldo">{{ (wallet && wallet.total_balance != null) ? Number(wallet.total_balance).toFixed(2) : Number(jogo.saldo).toFixed(2) }}</span>
           <span class="moeda-saldo">EUR</span>
         </div>
         <button class="btn-menu-hamburger">
@@ -313,6 +313,31 @@ const {
     display: flex;
     align-items: center;
     gap: 15px;
+  }
+
+  .btn-voltar {
+    background: #004a7c;
+    border: 1px solid #005f9e;
+    color: white;
+    border-radius: 20px;
+    padding: 0 15px;
+    height: 36px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-voltar:hover {
+    background: #005f9e;
+    transform: translateY(-1px);
+  }
+
+  .btn-voltar:active {
+    transform: translateY(0);
   }
 
   .btn-mines-menu {

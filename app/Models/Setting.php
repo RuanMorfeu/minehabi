@@ -187,5 +187,6 @@ class Setting extends Model
         'amount_rounds_free_any_deposit_cat4_min' => 'decimal:2',
         'amount_rounds_free_any_deposit_cat4_max' => 'decimal:2',
         'rounds_free_any_deposit_cat4' => 'integer',
+        'mines_win_chance' => 'integer',
     ];
 }

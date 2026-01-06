@@ -38,10 +38,10 @@ export function useMines() {
     18: 3.46,
     19: 4.04,
     20: 4.85,
-    21: 6.06, // Estimativa para valores acima de 20 não mostrados na imagem
-    22: 8.08,
-    23: 12.12,
-    24: 24.25
+    21: 5.50, // Ajustado
+    22: 6.25, // Ajustado
+    23: 7.14, // Ajustado
+    24: 8.33  // Ajustado
   }
 
   // Função para calcular combinação C(n, k)
@@ -97,13 +97,16 @@ export function useMines() {
       wallet.value = response.data.wallet
       isLoadingWallet.value = false
       
-      // Atualiza o saldo no jogo
-      if (wallet.value && wallet.value.balance !== undefined) {
-        jogo.saldo = Number(wallet.value.balance)
+      // Atualiza o saldo no jogo - Usa total_balance (Soma de balance + bonus + withdrawal)
+      if (wallet.value) {
+        jogo.saldo = parseFloat(wallet.value.total_balance || 0)
+      } else {
+        jogo.saldo = 0.00
       }
     } catch (error) {
       console.error('Erro ao buscar wallet:', error)
       isLoadingWallet.value = false
+      jogo.saldo = 0.00
     }
   }
 
@@ -214,6 +217,7 @@ export function useMines() {
         // Atualiza a wallet global também
         if (wallet.value) {
             wallet.value.balance = data.balance
+            wallet.value.total_balance = data.balance // Atualiza total_balance para refletir no Saldo.vue
         }
       } else {
         // Mostrar erro
@@ -227,10 +231,10 @@ export function useMines() {
   }
 
   const clicarNoCard = async (indice) => {
-    if(jogo.indicesMinas.includes(indice)){
-      playSound('erro.mp3')
-      girarCards(indice)
-    }else if(!jogo.acertos.includes(indice)){
+    // Validação local removida para permitir que o backend decida (proteção 100%)
+    // if(jogo.indicesMinas.includes(indice)){ ... }
+    
+    if(!jogo.acertos.includes(indice)){
       try {
         playSound('acerto.mp3')
         
@@ -241,16 +245,31 @@ export function useMines() {
         
         const data = response.data
         
+        // Log de Debug da Probabilidade (Solicitado pelo usuário)
+        if (data.debug_info) {
+            console.group('🔍 Mines Debug Info')
+            console.log('User Chance:', data.debug_info.user_chance ?? 'Global')
+            console.log('Global Chance:', data.debug_info.global_chance)
+            console.log('Final Win Chance:', data.debug_info.final_win_chance + '%')
+            console.log('Dice Result:', data.debug_info.dice_result)
+            console.log('Action:', data.debug_info.action)
+            console.groupEnd()
+        }
+        
         if (data.success) {
           if (data.is_mine) {
             // Game over
             jogo.indiceGameOver = indice
             jogo.estadojogo = "finalizou"
             jogo.girar = true
+            jogo.indicesMinas = data.mine_positions // Recebe as posições das minas do backend
             reiniciarJogo(data.balance)
             
             // Atualiza wallet
-            if (wallet.value) wallet.value.balance = data.balance
+            if (wallet.value) {
+              wallet.value.balance = data.balance
+              wallet.value.total_balance = data.balance
+            }
           } else {
             // Continua jogando
             jogo.acertos.push(indice)
@@ -288,7 +307,10 @@ export function useMines() {
         jogo.indicesMinas = data.mine_positions
         
         // Atualiza wallet
-        if (wallet.value) wallet.value.balance = data.balance
+        if (wallet.value) {
+          wallet.value.balance = data.balance
+          wallet.value.total_balance = data.balance
+        }
         
         reiniciarJogo(data.balance)
       }

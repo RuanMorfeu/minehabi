@@ -71,63 +71,73 @@ class DefaultSetting extends Page implements HasForms
                 return;
             }
 
+            // Obtém os dados validados e processados do formulário
+            $data = $this->form->getState();
             $setting = Setting::find($this->record->id);
 
-            $favicon = $this->data['software_favicon'];
-            $logoWhite = $this->data['software_logo_white'];
-            $logoBlack = $this->data['software_logo_black'];
-            $softwareBackground = $this->data['software_background'];
+            // Processamento de Uploads
+            $favicon = $data['software_favicon'] ?? null;
+            $logoWhite = $data['software_logo_white'] ?? null;
+            $logoBlack = $data['software_logo_black'] ?? null;
+            $softwareBackground = $data['software_background'] ?? null;
 
             if (is_array($softwareBackground) || is_object($softwareBackground)) {
                 if (! empty($softwareBackground)) {
-                    $this->data['software_background'] = $this->uploadFile($softwareBackground);
+                    $data['software_background'] = $this->uploadFile($softwareBackground);
 
-                    if (is_array($this->data['software_background'])) {
-                        unset($this->data['software_background']);
+                    if (is_array($data['software_background'])) {
+                        unset($data['software_background']);
                     }
                 }
             }
 
             if (is_array($favicon) || is_object($favicon)) {
                 if (! empty($favicon)) {
-                    $this->data['software_favicon'] = $this->uploadFile($favicon);
+                    $data['software_favicon'] = $this->uploadFile($favicon);
 
-                    if (is_array($this->data['software_favicon'])) {
-                        unset($this->data['software_favicon']);
+                    if (is_array($data['software_favicon'])) {
+                        unset($data['software_favicon']);
                     }
                 }
             }
 
             if (is_array($logoWhite) || is_object($logoWhite)) {
                 if (! empty($logoWhite)) {
-                    $this->data['software_logo_white'] = $this->uploadFile($logoWhite);
+                    $data['software_logo_white'] = $this->uploadFile($logoWhite);
 
-                    if (is_array($this->data['software_logo_white'])) {
-                        unset($this->data['software_logo_white']);
+                    if (is_array($data['software_logo_white'])) {
+                        unset($data['software_logo_white']);
                     }
                 }
             }
 
             if (is_array($logoBlack) || is_object($logoBlack)) {
                 if (! empty($logoBlack)) {
-                    $this->data['software_logo_black'] = $this->uploadFile($logoBlack);
+                    $data['software_logo_black'] = $this->uploadFile($logoBlack);
 
-                    if (is_array($this->data['software_logo_black'])) {
-                        unset($this->data['software_logo_black']);
+                    if (is_array($data['software_logo_black'])) {
+                        unset($data['software_logo_black']);
                     }
                 }
             }
 
+            // Atualização do .env
             $envs = DotenvEditor::load(base_path('.env'));
 
             $envs->setKeys([
-                'APP_NAME' => $this->data['software_name'],
-                'FILAMENT_BASE_URL' => $this->data['url_env'],
+                'APP_NAME' => $data['software_name'],
+                'FILAMENT_BASE_URL' => $data['url_env'],
             ]);
 
             $envs->save();
 
-            if ($setting->update($this->data)) {
+            // Trata o mines_win_chance para salvar null quando vazio
+            if (array_key_exists('mines_win_chance', $data) && $data['mines_win_chance'] === '') {
+                $data['mines_win_chance'] = null;
+            }
+
+            // Atualiza o registro no banco
+            if ($setting->update($data)) {
                 Cache::put('setting', $setting);
 
                 Notification::make()
@@ -139,6 +149,9 @@ class DefaultSetting extends Page implements HasForms
                 redirect(route('filament.admin.resources.settings.index'));
             }
         } catch (Halt $exception) {
+            return;
+        } catch (\Illuminate\Validation\ValidationException $exception) {
+            // Se houver erro de validação, o Filament já exibe as mensagens no formulário
             return;
         }
     }

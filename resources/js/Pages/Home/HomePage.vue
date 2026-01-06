@@ -53,21 +53,6 @@
                         <!-- Grid de Jogos de Habilidade + Mines -->
                         <div v-if="allExclusiveGames && allExclusiveGames.length > 0" class="mb-2 bg-white dark:bg-[#1f2937] rounded-lg p-2 shadow-md">
                             <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
-                                <!-- Card do Jogo Mines -->
-                                <div class="relative group cursor-pointer" @click="goToMines">
-                                    <div class="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
-                                        <img src="/resources/assets/images/mines-cover.png" alt="Mines" class="w-full h-32 object-cover">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3">
-                                            <h3 class="text-white font-bold text-sm">Mines</h3>
-                                            <p class="text-gray-300 text-xs">Encontre as minas e ganhe!</p>
-                                        </div>
-                                        <div class="absolute top-2 right-2">
-                                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">Novo</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
                                 <CassinoGameCard v-for="(game, index) in allExclusiveGames" 
                                     :key="'exclusive_' + index" 
                                     :index="index" 
@@ -286,6 +271,23 @@ export default {
             
             const games = [];
             
+            // Adiciona o Mines manualmente com os dados do banco
+            const minesGame = {
+                id: 999999,
+                game_code: 'mines-001',
+                game_name: 'Mines',
+                cover: 'games/covers/01KE82XJSAA00E4E6PQ9HSKN31.png',
+                home_cover: 'games/home-covers/01KE82XJSFFG7M4WECRQF1HBVG.png',
+                distribution: 'mines',
+                views: 999999,
+                is_featured: 1,
+                show_home: 1,
+                status: 1,
+                provider_id: null
+            };
+            console.log('Mines game:', minesGame);
+            games.push(minesGame);
+            
             // Adiciona jogos exclusivos originais
             if (this.exclusive_games && this.exclusive_games.length > 0) {
                 console.log('Adicionando exclusive_games:', this.exclusive_games.map(g => g.game_name));
@@ -327,9 +329,6 @@ export default {
         }
     },
     methods: {
-        goToMines() {
-            this.$router.push({ name: 'games.mines' });
-        },
         checkPaymentStatus() {
             const urlParams = new URLSearchParams(window.location.search);
             const paymentStatus = urlParams.get('payment_status');

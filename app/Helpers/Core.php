@@ -104,6 +104,48 @@ class Core
         return $changeBonus;
     }
 
+    /*** @param Wallet $wallet
+     * @param $bet
+     * @return string - Método específico para Mines
+     */
+    public static function DiscountBalanceMines(Wallet $wallet, $bet)
+    {
+        $changeBonus = 'no_balance';
+
+        // Ordem específica para Mines: Bonus -> Balance -> Withdrawal
+        if ($wallet->balance_bonus >= $bet) {
+            $wallet->decrement('balance_bonus', $bet);
+
+            return 'balance_bonus';
+        } elseif ($wallet->balance >= $bet) {
+            $wallet->decrement('balance', $bet);
+
+            return 'balance';
+        } elseif ($wallet->balance_withdrawal >= $bet) {
+            $wallet->decrement('balance_withdrawal', $bet);
+
+            return 'balance_withdrawal';
+        } elseif ($wallet->total_balance_without_bonus >= $bet) {
+            // Combina balance + withdrawal
+            $balanceBet = 0;
+            $remainingBet = 0;
+
+            if ($wallet->balance > 0) {
+                $balanceBet = min($wallet->balance, $bet);
+                $wallet->decrement('balance', $balanceBet);
+            }
+
+            $remainingBet = $bet - $balanceBet;
+            if ($remainingBet > 0 && $wallet->balance_withdrawal >= $remainingBet) {
+                $wallet->decrement('balance_withdrawal', $remainingBet);
+            }
+
+            return 'balance_withdrawal';
+        }
+
+        return $changeBonus;
+    }
+
     /*** Paga e atualiza o bonus vip
      *
 

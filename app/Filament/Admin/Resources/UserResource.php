@@ -213,12 +213,13 @@ class UserResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('mines_win_chance')
                             ->label('Chance de Vitória (%)')
-                            ->helperText('Defina a porcentagem de chance de vitória (0-100). Se deixar em branco, será aleatório (padrão).')
+                            ->helperText('Defina a porcentagem de chance de vitória (0-100). Se deixar em branco, usará a Configuração Global.')
                             ->numeric()
                             ->minValue(0)
                             ->maxValue(100)
                             ->suffix('%')
                             ->nullable()
+                            ->dehydrateStateUsing(fn ($state) => $state === '' ? null : $state)
                             ->placeholder('Aleatório (Padrão)'),
                     ])->columns(1),
                 Forms\Components\Section::make()

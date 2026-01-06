@@ -3,7 +3,7 @@
     <p v-if="jogo.estadojogo == 'finalizou' && !jogo.indiceGameOver" class="lucro">
       +{{ Number(jogo.valorCashOut).toFixed(2) }} EUR
     </p>
-    <p class="saldoMines">{{ (wallet && wallet.balance != null) ? Number(wallet.balance).toFixed(2) : Number(jogo.saldo).toFixed(2) }}</p>
+    <p class="saldoMines">{{ formatSaldo() }}</p>
     <p class="moedaMines">EUR</p>
   </div>
 </template>
@@ -11,7 +11,7 @@
 <script setup>
 const emit = defineEmits(['refresh'])
 
-defineProps({
+const props = defineProps({
   jogo: {
     type: Object,
     required: true
@@ -25,6 +25,14 @@ defineProps({
     default: false
   }
 })
+
+const formatSaldo = () => {
+  if (props.wallet && props.wallet.total_balance != null) {
+    return Number(props.wallet.total_balance).toFixed(2)
+  }
+  
+  return Number(props.jogo.saldo).toFixed(2)
+}
 
 const refreshSaldo = () => {
   emit('refresh')

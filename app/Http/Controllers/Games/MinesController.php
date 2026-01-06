@@ -43,8 +43,8 @@ class MinesController extends Controller
             }
         }
 
-        // 1. Desconta o saldo usando o Helper central (Gerencia ordem: Bonus -> Balance -> Withdrawal)
-        $changeBonus = \App\Helpers\Core::DiscountBalance($wallet, $betAmount);
+        // 1. Desconta o saldo usando o método específico do Mines (Bonus -> Balance -> Withdrawal)
+        $changeBonus = \App\Helpers\Core::DiscountBalanceMines($wallet, $betAmount);
 
         if ($changeBonus === 'no_balance') {
             return response()->json([
@@ -60,11 +60,13 @@ class MinesController extends Controller
         $minePositions = $this->generateMinePositions($request->mines_count);
 
         // Criar registro do jogo
+        // O Model tem 'mine_positions' => 'array', então passamos o array direto.
+        // O Laravel vai converter para JSON automaticamente.
         $game = MinesGame::create([
             'user_id' => $user->id,
             'bet_amount' => $betAmount,
             'mines_count' => $request->mines_count,
-            'mine_positions' => json_encode($minePositions),
+            'mine_positions' => $minePositions, // Passando array direto
             'status' => 'playing',
             'multiplier' => 1.00,
             'potential_win' => $betAmount,
@@ -81,11 +83,14 @@ class MinesController extends Controller
             'wallet_type' => $changeBonus,
         ]);
 
+        // Atualiza a instância da carteira com os dados do banco
+        $wallet = $wallet->fresh();
+
         return response()->json([
             'success' => true,
             'game_id' => $game->id,
-            'mine_positions' => $minePositions,
-            'balance' => $wallet->fresh()->balance + $wallet->balance_bonus + $wallet->balance_withdrawal,
+            'mine_positions' => [], // NÃO enviar as posições das minas no início (Segurança + Lógica de Backend)
+            'balance' => $wallet->balance + $wallet->balance_bonus + $wallet->balance_withdrawal,
         ]);
     }
 
@@ -106,19 +111,52 @@ class MinesController extends Controller
             ->where('status', 'playing')
             ->firstOrFail();
 
-        $minePositions = json_decode($game->mine_positions);
+        // Garante que minePositions seja um array, independente do casting
+        $minePositionsRaw = $game->mine_positions;
+        if (is_string($minePositionsRaw)) {
+            $minePositions = json_decode($minePositionsRaw, true);
+        } elseif (is_array($minePositionsRaw)) {
+            $minePositions = $minePositionsRaw;
+        } else {
+            $minePositions = []; // Fallback de segurança
+        }
+
+        // Garante que são inteiros para comparação estrita se necessário, ou pelo menos consistente
+        $minePositions = array_map('intval', $minePositions);
+        $position = intval($request->position);
 
         // Lógica de Manipulação de Chance de Vitória
         // Recupera a chance do usuário ou a chance global
         $setting = \App\Models\Setting::first();
-        $winChance = $user->mines_win_chance ?? $setting->mines_win_chance;
+        $userChance = $user->mines_win_chance;
+        $globalChance = $setting->mines_win_chance;
+        $winChance = $userChance ?? $globalChance;
+
+        $debugAction = 'none';
+        $debugDice = null;
+
+        \Log::info('MINES REVEAL START', [
+            'game_id' => $game->id,
+            'position' => $position,
+            'mine_positions_type' => gettype($minePositionsRaw),
+            'mine_positions_count' => count($minePositions),
+            'has_mine_initially' => in_array($position, $minePositions),
+            'win_chance' => $winChance,
+        ]);
 
         // Se existe uma chance definida (seja user ou global) e clicou em uma mina
-        if (! is_null($winChance) && in_array($request->position, $minePositions)) {
+        if (! is_null($winChance) && in_array($position, $minePositions)) {
+            $dice = rand(1, 100);
+            $debugDice = $dice;
+
+            \Log::info('MINES PROBABILITY CHECK', ['dice' => $dice, 'chance' => $winChance]);
+
             // Sorteia se o usuário deve ser salvo baseada na porcentagem (0-100)
-            if (rand(1, 100) <= $winChance) {
+            if ($dice <= $winChance) {
                 // Recupera posições já reveladas
-                $revealedPositions = $game->revealed_positions ? json_decode($game->revealed_positions) : [];
+                $revealedPositionsRaw = $game->revealed_positions;
+                $revealedPositions = is_string($revealedPositionsRaw) ? json_decode($revealedPositionsRaw, true) : ($revealedPositionsRaw ?? []);
+                $revealedPositions = array_map('intval', $revealedPositions);
 
                 // Todas as posições do tabuleiro
                 $allPositions = range(0, 24);
@@ -127,7 +165,7 @@ class MinesController extends Controller
                 // 1. Onde já tem mina (exceto a que ele clicou, que vai sair)
                 // 2. Onde já foi revelado (estrelas)
                 // 3. A posição que ele clicou agora (queremos que vire estrela)
-                $occupiedOrSafePositions = array_unique(array_merge($minePositions, $revealedPositions, [$request->position]));
+                $occupiedOrSafePositions = array_unique(array_merge($minePositions, $revealedPositions, [$position]));
 
                 // Posições livres para onde a mina pode ser movida
                 $availablePositions = array_diff($allPositions, $occupiedOrSafePositions);
@@ -135,28 +173,40 @@ class MinesController extends Controller
                 // Se houver lugar disponível para mover a mina
                 if (! empty($availablePositions)) {
                     // Remove a mina da posição clicada
-                    $minePositions = array_values(array_diff($minePositions, [$request->position]));
+                    $minePositions = array_values(array_diff($minePositions, [$position]));
 
                     // Escolhe uma nova posição aleatória para a mina
                     $newMinePosition = $availablePositions[array_rand($availablePositions)];
                     $minePositions[] = $newMinePosition;
 
                     // Atualiza as posições no banco de dados
-                    $game->update([
-                        'mine_positions' => json_encode($minePositions),
-                    ]);
+                    // Importante: Salvar como JSON se o cast esperar array mas formos salvar raw, ou array se cast cuidar
+                    // Vamos salvar como array e deixar o Laravel lidar com o cast
+                    $game->mine_positions = $minePositions;
+                    $game->save();
 
-                    // Log para debug (opcional)
-                    \Log::info("Mina movida (Global/User) para salvar usuário {$user->id}. De: {$request->position} Para: {$newMinePosition}. Chance: {$winChance}%");
+                    $debugAction = 'saved_by_system';
+                    \Log::info("MINES SAVED: Mina movida de {$position} para {$newMinePosition}");
+                } else {
+                    $debugAction = 'failed_to_move_full_board';
+                    \Log::warning('MINES SAVE FAILED: Sem posições disponíveis');
                 }
+            } else {
+                $debugAction = 'dice_failed';
+            }
+        } else {
+            if (in_array($position, $minePositions)) {
+                $debugAction = 'hit_mine_no_protection';
+            } else {
+                $debugAction = 'normal_safe_hit';
             }
         }
 
-        if (in_array($request->position, $minePositions)) {
+        if (in_array($position, $minePositions)) {
             // Game Over - atingiu uma mina
             $game->update([
                 'status' => 'lost',
-                'revealed_positions' => json_encode($minePositions),
+                'revealed_positions' => $minePositions, // Array direto (Model faz cast)
             ]);
 
             // Criar transação de perda (valor zero, apenas para registro)
@@ -176,10 +226,21 @@ class MinesController extends Controller
                 'game_over' => true,
                 'mine_positions' => $minePositions,
                 'balance' => $wallet->balance + $wallet->balance_bonus + $wallet->balance_withdrawal,
+                'debug_info' => [
+                    'user_chance' => $userChance,
+                    'global_chance' => $globalChance,
+                    'final_win_chance' => $winChance,
+                    'dice_result' => isset($debugDice) ? $debugDice : 'N/A',
+                    'action' => $debugAction,
+                    'is_mine_result' => true,
+                    'position_clicked' => $position,
+                ],
             ]);
         } else {
             // Acertou - calcular novo multiplicador
-            $revealedPositions = $game->revealed_positions ? json_decode($game->revealed_positions) : [];
+            $revealedPositionsRaw = $game->revealed_positions;
+            $revealedPositions = is_string($revealedPositionsRaw) ? json_decode($revealedPositionsRaw, true) : ($revealedPositionsRaw ?? []);
+
             $revealedPositions[] = $request->position;
 
             $newMultiplier = $this->calculateMultiplier(
@@ -190,7 +251,7 @@ class MinesController extends Controller
             $potentialWin = $game->bet_amount * $newMultiplier;
 
             $game->update([
-                'revealed_positions' => json_encode($revealedPositions),
+                'revealed_positions' => $revealedPositions, // Array direto (Model faz cast)
                 'multiplier' => $newMultiplier,
                 'potential_win' => $potentialWin,
             ]);
@@ -201,6 +262,15 @@ class MinesController extends Controller
                 'multiplier' => $newMultiplier,
                 'potential_win' => $potentialWin,
                 'revealed_count' => count($revealedPositions),
+                'debug_info' => [
+                    'user_chance' => $userChance,
+                    'global_chance' => $globalChance,
+                    'final_win_chance' => $winChance,
+                    'dice_result' => isset($debugDice) ? $debugDice : 'N/A',
+                    'action' => $debugAction,
+                    'is_mine_result' => false,
+                    'position_clicked' => $position,
+                ],
             ]);
         }
     }
@@ -249,7 +319,7 @@ class MinesController extends Controller
             'success' => true,
             'win_amount' => $winAmount,
             'balance' => $wallet->balance + $wallet->balance_bonus + $wallet->balance_withdrawal,
-            'mine_positions' => json_decode($game->mine_positions),
+            'mine_positions' => $game->mine_positions, // Cast do Model já retorna array
         ]);
     }
 
@@ -293,10 +363,10 @@ class MinesController extends Controller
             18 => 3.46,
             19 => 4.04,
             20 => 4.85,
-            21 => 6.06,
-            22 => 8.08,
-            23 => 12.12,
-            24 => 24.25,
+            21 => 5.50, // Ajustado
+            22 => 6.25, // Ajustado
+            23 => 7.14, // Ajustado
+            24 => 8.33, // Ajustado
         ];
 
         // Se for o primeiro acerto, retorna o valor exato da tabela

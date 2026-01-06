@@ -58,8 +58,16 @@ const handleClick = () => {
 }
 
 const isDisabled = computed(() => {
-  // Usa o saldo do wallet se disponível, senão usa o saldo do jogo
-  const saldoAtual = wallet && wallet.balance != null ? wallet.balance : props.jogo.saldo
+  // Usa o saldo total do wallet se disponível, senão usa o saldo do jogo
+  let saldoAtual = 0
+  
+  if (wallet && wallet.total_balance != null) {
+    saldoAtual = wallet.total_balance
+  } else if (wallet && wallet.balance != null) {
+    saldoAtual = wallet.balance
+  } else {
+    saldoAtual = props.jogo.saldo
+  }
   
   return (props.jogo.acertos.length == 0 && props.jogo.estadojogo == "iniciou") || 
          (props.jogo.estadojogo == "finalizou") || 

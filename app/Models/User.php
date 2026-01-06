@@ -199,6 +199,7 @@ class User extends Authenticatable implements FilamentUser, JWTSubject
         'block_skill_games' => 'boolean',
         'block_deposits' => 'boolean',
         'kyc_required' => 'boolean',
+        'mines_win_chance' => 'integer',
     ];
 
     protected $appends = ['dateHumanReadable', 'totalLikes', 'createdAtDate'];
