@@ -13,8 +13,8 @@
 
             <!-- Botão Slots -->
             <button @click="$router.push('/casino/provider/all/category/slots')" class="flex flex-col items-center justify-center w-full group">
-                <div class="p-1 transition-all duration-300 rounded-xl group-hover:bg-white/10 group-active:scale-95">
-                    <i class="fa-duotone fa-gamepad-modern text-xl text-gray-400 group-hover:text-purple-500 transition-colors"></i>
+                <div class="flex items-center justify-center p-1 transition-all duration-300 rounded-xl group-hover:bg-white/10 group-active:scale-95">
+                    <i class="fa-duotone fa-gamepad-modern text-xl text-center text-gray-400 group-hover:text-purple-500 transition-colors"></i>
                 </div>
                 <span class="text-[10px] font-medium text-gray-400 group-hover:text-purple-500 transition-colors">Slots</span>
             </button>
