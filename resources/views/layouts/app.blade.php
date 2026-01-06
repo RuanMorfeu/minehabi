@@ -199,7 +199,7 @@
         </script>
     </head>
     <body color-theme="light" class="bg-base text-gray-800">
-        <div id="ganhoubet"></div>
+        <div id="deibet"></div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/datepicker.min.js"></script>
         <script>
