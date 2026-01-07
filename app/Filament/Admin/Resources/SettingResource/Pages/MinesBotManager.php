@@ -65,14 +65,26 @@ class MinesBotManager extends Page implements HasForms
                             ->label('Status do Processo')
                             ->content(function () {
                                 // Verifica se existe algum processo python rodando o script do bot
-                                $pid = trim(shell_exec('pgrep -f Mines_com_api.py | head -n 1'));
+                                // Retorna PID e PPID (Parent PID)
+                                $output = trim(shell_exec('ps -eo pid,ppid,args | grep "Mines_com_api.py" | grep -v grep | head -n 1'));
 
-                                $msg = 'MinesBotManager: Verificando status. PID encontrado: '.($pid ?: 'Nenhum');
-                                Log::info($msg);
-                                error_log($msg);
+                                if (! empty($output)) {
+                                    // Remove espaços múltiplos
+                                    $parts = preg_split('/\s+/', trim($output));
+                                    $pid = $parts[0] ?? null;
+                                    $ppid = $parts[1] ?? null;
 
-                                if (! empty($pid) && is_numeric($pid)) {
-                                    return '🟢 Em execução (PID: '.$pid.')';
+                                    $msg = "MinesBotManager: Status Check. PID: $pid, PPID: $ppid. Raw: $output";
+                                    Log::info($msg);
+                                    error_log($msg);
+
+                                    if (is_numeric($pid)) {
+                                        return "🟢 Em execução (PID: $pid | Pai: $ppid)";
+                                    }
+                                } else {
+                                    $msg = 'MinesBotManager: Status Check. Nenhum processo encontrado.';
+                                    Log::info($msg);
+                                    error_log($msg);
                                 }
 
                                 return '🔴 Parado';
