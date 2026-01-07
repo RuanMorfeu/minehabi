@@ -64,7 +64,7 @@ def ALERT_GALE1():
 🔍 ANALISANDO TABULEIRO...
 
 📊 Identificando posições seguras...
-⏳ Aguarde...''', parse_mode='HTML').message_id
+⏳ Aguarde...''').message_id
     bd.message_ids1 = message_id
     time.sleep(60)
     bd.message_delete1 = True
@@ -142,7 +142,7 @@ while True:
 ⏰ Entre agora e boa sorte!
 '''
 
-    dados = bot.send_message(chat_id=chat_id, text=message_text, reply_markup=button_link(), parse_mode='HTML')
+    dados = bot.send_message(chat_id=chat_id, text=message_text, reply_markup=button_link())
 
     time.sleep(180)
 
@@ -151,6 +151,6 @@ Lucro Garantido ✅, Espere o Próximo Sinal
 Cadastre-se Na Plataforma 👇🏼
     ''', reply_markup=InlineKeyboardMarkup().add(
         InlineKeyboardButton("LINK COM VANTAGEM 💎", url="https://dei.bet/register")
-    ), parse_mode='HTML')
+    ))
 
     time.sleep(30)
