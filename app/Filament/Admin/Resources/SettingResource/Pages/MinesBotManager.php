@@ -64,10 +64,13 @@ class MinesBotManager extends Page implements HasForms
                             ->label('Status do Processo')
                             ->content(function () {
                                 // Verifica se existe algum processo python rodando o script do bot
-                                $pid = trim(shell_exec('pgrep -f Mines_com_api.py | head -n 1'));
+                                $pid = trim(shell_exec('pgrep -f "python Mines_com_api.py" | head -n 1'));
 
                                 if (! empty($pid) && is_numeric($pid)) {
-                                    return '🟢 Em execução (PID: '.$pid.')';
+                                    // Pega o comando exato para confirmar o que é
+                                    $cmd = trim(shell_exec("ps -p $pid -o args="));
+
+                                    return "🟢 Em execução (PID: $pid)\nCMD: $cmd";
                                 }
 
                                 return '🔴 Parado';
@@ -192,8 +195,48 @@ class MinesBotManager extends Page implements HasForms
     protected function stopBot()
     {
         try {
+            $logPath = base_path('bots/mines/bot_output.log');
+            $timestamp = date('Y-m-d H:i:s');
+
+            // Log do início da ação
+            if (file_exists($logPath) && is_writable($logPath)) {
+                file_put_contents($logPath, "\n[$timestamp] ADMIN: Comando 'Parar Bot' recebido.\n", FILE_APPEND);
+            }
+
+            // Identifica processos antes
+            $pids = trim(shell_exec('pgrep -f Mines_com_api.py'));
+
+            if (! empty($pids)) {
+                if (file_exists($logPath) && is_writable($logPath)) {
+                    file_put_contents($logPath, "[$timestamp] ADMIN: Processos encontrados antes do kill: ".str_replace("\n", ' ', $pids)."\n", FILE_APPEND);
+                }
+            } else {
+                if (file_exists($logPath) && is_writable($logPath)) {
+                    file_put_contents($logPath, "[$timestamp] ADMIN: Nenhum processo encontrado para parar.\n", FILE_APPEND);
+                }
+            }
+
             // Mata todos os processos relacionados ao bot
             exec('pkill -f Mines_com_api.py');
+
+            // Aguarda 1 segundo para o sistema operacional processar
+            sleep(1);
+
+            // Verifica se ainda tem algo rodando
+            $pidsAfter = trim(shell_exec('pgrep -f Mines_com_api.py'));
+
+            if (! empty($pidsAfter)) {
+                if (file_exists($logPath) && is_writable($logPath)) {
+                    file_put_contents($logPath, "[$timestamp] ADMIN: AVISO - Processos ainda ativos (PID: $pidsAfter). Tentando kill forçado (-9)...\n", FILE_APPEND);
+                }
+
+                // Força bruta se não morreu
+                exec('pkill -9 -f Mines_com_api.py');
+            } else {
+                if (file_exists($logPath) && is_writable($logPath)) {
+                    file_put_contents($logPath, "[$timestamp] ADMIN: Todos os processos do bot foram finalizados.\n", FILE_APPEND);
+                }
+            }
 
             Notification::make()
                 ->title('Bot parado com sucesso!')
