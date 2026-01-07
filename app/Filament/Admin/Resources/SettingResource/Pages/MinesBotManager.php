@@ -113,10 +113,10 @@ class MinesBotManager extends Page implements HasForms
             // Garante que não tem outro bot rodando antes de iniciar
             exec('pkill -f Mines_com_api.py');
 
-            // Executa em background sem timeout
+            // Executa em background sem timeout, redirecionando saída para log
             $process = new Process([
                 'bash', '-c',
-                'cd '.base_path('bots/mines').' && source venv/bin/activate && nohup python Mines_com_api.py > /dev/null 2>&1 & echo $!',
+                'cd '.base_path('bots/mines').' && source venv/bin/activate && nohup python Mines_com_api.py > bot_output.log 2>&1 & echo $!',
             ]);
             $process->setTimeout(0);
             $process->run();
