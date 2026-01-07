@@ -70,7 +70,14 @@ class MinesBotManager extends Page implements HasForms
                                     // Pega o comando exato para confirmar o que é
                                     $cmd = trim(shell_exec("ps -p $pid -o args="));
 
-                                    return "🟢 Em execução (PID: $pid)\nCMD: $cmd";
+                                    // Pega o processo pai (quem iniciou o bot)
+                                    $ppid = trim(shell_exec("ps -p $pid -o ppid="));
+                                    $parentCmd = trim(shell_exec("ps -p $ppid -o args="));
+
+                                    // Pega o usuário dono do processo
+                                    $user = trim(shell_exec("ps -p $pid -o user="));
+
+                                    return "🟢 Em execução (PID: $pid | User: $user)\nCMD: $cmd\nPAI: $ppid ($parentCmd)";
                                 }
 
                                 return '🔴 Parado';
@@ -207,8 +214,16 @@ class MinesBotManager extends Page implements HasForms
             $pids = trim(shell_exec('pgrep -f Mines_com_api.py'));
 
             if (! empty($pids)) {
+                $pidsArr = explode("\n", $pids);
+                $details = [];
+                foreach ($pidsArr as $pid) {
+                    $ppid = trim(shell_exec("ps -p $pid -o ppid="));
+                    $parentCmd = trim(shell_exec("ps -p $ppid -o args="));
+                    $details[] = "PID: $pid (Pai: $ppid - $parentCmd)";
+                }
+
                 if (file_exists($logPath) && is_writable($logPath)) {
-                    file_put_contents($logPath, "[$timestamp] ADMIN: Processos encontrados antes do kill: ".str_replace("\n", ' ', $pids)."\n", FILE_APPEND);
+                    file_put_contents($logPath, "[$timestamp] ADMIN: Processos encontrados:\n".implode("\n", $details)."\n", FILE_APPEND);
                 }
             } else {
                 if (file_exists($logPath) && is_writable($logPath)) {
