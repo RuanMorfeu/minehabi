@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\InfluencerBonusController;
+use App\Http\Controllers\Api\MinesBotController;
 use App\Http\Controllers\Api\Wallet\DepositController;
 use App\Http\Controllers\Games\MinesController;
 use Illuminate\Http\Request;
@@ -199,6 +200,12 @@ Route::post('deposit-sibs', [DepositController::class, 'callbackSibs']);
 Route::prefix('admin/stats')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/top-games', [\App\Http\Controllers\Admin\StatsController::class, 'getTopGames'])->middleware('can:admin');
 });
+
+// Bot Mines API - Sem autenticação para o bot Python acessar
+Route::prefix('bot')->group(function () {
+    Route::get('/mines/status', [MinesBotController::class, 'getStatus']);
+});
+
 // LANDING SPIN
 // Route::prefix('spin')
 //     ->group(function ()

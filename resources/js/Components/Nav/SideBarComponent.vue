@@ -29,45 +29,7 @@
                 </li>
             </ul> -->
 
-            <div
-                class="flex items-center justify-center text-gray-500 md:hidden"
-            >
-                <RouterLink
-                    :to="{ name: 'home' }"
-                    active-class="text-white border-b-2 border-primary"
-                    class="flex gap-2 flex-row w-[50%] cursor-pointer items-center px-2 py-3 justify-center"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        version="1.1"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                        xmlns:svgjs="http://svgjs.com/svgjs"
-                        width="16px"
-                        height="16px"
-                        x="0"
-                        y="0"
-                        viewBox="0 0 512 512"
-                        xml:space="preserve"
-                    >
-                        <g>
-                            <path
-                                d="M479.001 34.656 285.933.613c-21.715-3.829-42.423 10.671-46.252 32.386l-1.827 10.363c27.921 3.44 51.51 23.554 58.937 51.269l11.799 44.035a35.815 35.815 0 0 1 20.537-2.414c13.677 2.412 24.17 12.255 28.079 24.642 7.91-10.303 21.137-15.964 34.814-13.552 19.575 3.452 32.646 22.119 29.194 41.694-7.5 42.534-53.143 76.721-74.804 90.782l33.071 123.423a69.601 69.601 0 0 1 2.349 19.79l27.824 4.906c21.715 3.829 42.423-10.671 46.252-32.386l55.48-314.641c3.83-21.717-10.67-42.425-32.385-46.254z"
-                                fill="currentColor"
-                                data-original="#000000"
-                            ></path>
-                            <path
-                                d="M267.867 102.382c-4.78-17.838-20.911-29.603-38.54-29.602-3.42 0-6.898.443-10.359 1.37L29.602 124.89c-21.299 5.707-33.939 27.6-28.232 48.899l82.691 308.609c4.78 17.838 20.911 29.602 38.54 29.602 3.42 0 6.898-.443 10.358-1.37l189.366-50.741c21.299-5.707 33.939-27.6 28.232-48.899zM120.51 313.333a10.603 10.603 0 0 1-3.042-11.353l28.956-85.738c2.422-7.172 11.364-9.568 17.048-4.568l67.946 59.774a10.603 10.603 0 0 1 3.042 11.353l-28.956 85.738c-2.422 7.172-11.364 9.569-17.048 4.568z"
-                                fill="currentColor"
-                                data-original="#000000"
-                            ></path>
-                        </g>
-                    </svg>
-                    <p class="text-[14.4px] font-bold">CASSINO</p>
-                </RouterLink>
-
             
-            </div>
-
             <div class="snake-sidebar-brand">
                 <div class="flex justify-center">
                     <RouterLink :to="{ name: 'home' }" class="flex justify-center">
@@ -106,17 +68,7 @@
                         <span class="ml-3">{{ $t("Wallet") }}</span>
                     </RouterLink>
                 </li>
-                <li class="" v-if="isAuthenticated">
-                    <RouterLink
-                        :to="{ name: 'casinos' }"
-                        active-class="link-active"
-                        class="snake-side-item"
-                    >
-                        <i class="fa-duotone fa-stars"></i>
-                        <span class="ml-3">{{ $t("Favorites") }}</span>
-                    </RouterLink>
-                </li>
-
+                
                 <!-- Dynamic Games List -->
                 <!-- Debug: {{ allExclusiveGames.length }} games -->
                 <li v-if="allExclusiveGames && allExclusiveGames.length > 0" v-for="(game, index) in allExclusiveGames.slice(0, 10)" :key="index">

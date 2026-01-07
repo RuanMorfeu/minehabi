@@ -150,6 +150,9 @@ class Setting extends Model
         // Chance Global de Vitória no Mines
         'mines_win_chance',
 
+        // Bot Mines Telegram
+        'mines_bot_enabled',
+
     ];
 
     protected $hidden = ['updated_at'];

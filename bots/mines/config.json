@@ -1,0 +1,9 @@
+{
+    "telegram": {
+        "bot_token": "8436063445:AAHyig42WfYoKH-THDR8aEfhh0FgpViAkzM",
+        "chat_id": "-1003163295272"
+    },
+    "api": {
+        "laravel_url": "http://localhost:8000/api/bot/mines/status"
+    }
+}

@@ -87,6 +87,18 @@ class SettingResource extends Resource
                     ->isActiveWhen(function () {
                         return request()->routeIs(static::getRouteBaseName().'.affiliate');
                     }),
+                PageNavigationItem::make('Gerenciar Bot')
+                    ->translateLabel()
+                    ->url(static::getUrl('mines_manager', ['record' => $record->id]))->icon('heroicon-o-cog-6-tooth')
+                    ->isActiveWhen(function () {
+                        return request()->routeIs(static::getRouteBaseName().'.mines_manager');
+                    }),
+                PageNavigationItem::make('Config Bot')
+                    ->translateLabel()
+                    ->url(static::getUrl('mines_config', ['record' => $record->id]))->icon('heroicon-o-cog')
+                    ->isActiveWhen(function () {
+                        return request()->routeIs(static::getRouteBaseName().'.mines_config');
+                    }),
             ]);
     }
 
@@ -147,6 +159,8 @@ class SettingResource extends Resource
             'payment' => \App\Filament\Admin\Resources\SettingResource\Pages\PaymentSetting::route('/payment/{record}'),
             'affiliate' => \App\Filament\Admin\Resources\SettingResource\Pages\AffiliatePage::route('/affiliate/{record}'),
             'gateway' => \App\Filament\Admin\Resources\SettingResource\Pages\GatewayPage::route('/gateway/{record}'),
+            'mines_manager' => \App\Filament\Admin\Resources\SettingResource\Pages\MinesBotManager::route('/mines-manager/{record}'),
+            'mines_config' => \App\Filament\Admin\Resources\SettingResource\Pages\MinesBotConfig::route('/mines-config/{record}'),
         ];
     }
 }
