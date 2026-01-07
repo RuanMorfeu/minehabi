@@ -10,6 +10,12 @@ from datetime import datetime
 from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup
 import bd
 
+import urllib3
+from urllib.parse import urlparse
+
+# Silencia warnings de SSL inseguro (necessário para loopback local)
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 # Configuração de Logs
 log_file = os.path.join(os.path.dirname(__file__), 'bot_debug.log')
 logging.basicConfig(
@@ -21,7 +27,7 @@ logging.basicConfig(
     ]
 )
 
-logging.info("Iniciando bot Mines...")
+logging.info("Iniciando bot Mines v2 (Anti-Block)...")
 
 # Carrega configurações do arquivo JSON
 def carregar_config():
@@ -59,7 +65,32 @@ def verificar_status_bot():
     """Verifica se o bot está habilitado no painel admin"""
     try:
         logging.debug(f"Verificando status na API: {api_url}")
-        response = requests.get(api_url, timeout=10)
+        
+        parsed_url = urlparse(api_url)
+        # Prepara URL local (Loopback)
+        # Se for um domínio real, substitui por 127.0.0.1 para evitar sair para a internet/WAF
+        if parsed_url.hostname not in ['localhost', '127.0.0.1']:
+            target_netloc = '127.0.0.1'
+            if parsed_url.port:
+                target_netloc += f":{parsed_url.port}"
+            local_url = api_url.replace(parsed_url.netloc, target_netloc)
+            original_host = parsed_url.netloc # Host original (ex: dei.bet)
+        else:
+            local_url = api_url
+            original_host = parsed_url.netloc
+
+        logging.debug(f"URL Loopback: {local_url} | Host Header: {original_host}")
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'application/json',
+            'Host': original_host, 
+            'Referer': f"{parsed_url.scheme}://{original_host}/"
+        }
+        
+        # verify=False é OBRIGATÓRIO para loopback HTTPS local (certificado não bate com 127.0.0.1)
+        response = requests.get(local_url, headers=headers, timeout=10, verify=False)
+        
         if response.status_code == 200:
             data = response.json()
             status = data.get('enabled', False)
@@ -67,6 +98,10 @@ def verificar_status_bot():
             return status
         else:
             logging.warning(f"API retornou status code: {response.status_code}")
+            try:
+                logging.warning(f"Resposta: {response.text[:500]}") 
+            except:
+                pass
             return False
     except Exception as e:
         logging.error(f"Erro ao verificar status na API: {e}")
