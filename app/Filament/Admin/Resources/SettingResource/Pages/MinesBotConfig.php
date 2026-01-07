@@ -7,6 +7,7 @@ use App\Models\Setting;
 use AymanAlhattami\FilamentPageWithSidebar\Traits\HasPageSidebar;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -35,23 +36,38 @@ class MinesBotConfig extends Page implements HasForms
     public function mount(): void
     {
         $this->record = Setting::first();
-
         $configPath = base_path('bots/mines/config.json');
 
+        $data = [];
+
+        // Carrega estado do banco
+        if ($this->record) {
+            $data['mines_bot_enabled'] = (bool) $this->record->mines_bot_enabled;
+        }
+
+        // Carrega estado do JSON
         if (File::exists($configPath)) {
             $config = json_decode(File::get($configPath), true);
-            $this->form->fill([
-                'telegram_bot_token' => $config['telegram']['bot_token'] ?? '',
-                'telegram_chat_id' => $config['telegram']['chat_id'] ?? '',
-                'laravel_api_url' => $config['api']['laravel_url'] ?? '',
-            ]);
+            $data['telegram_bot_token'] = $config['telegram']['bot_token'] ?? '';
+            $data['telegram_chat_id'] = $config['telegram']['chat_id'] ?? '';
+            $data['laravel_api_url'] = $config['api']['laravel_url'] ?? '';
         }
+
+        $this->form->fill($data);
     }
 
     public function save()
     {
         $data = $this->form->getState();
 
+        // Salva no Banco de Dados
+        if ($this->record) {
+            $this->record->update([
+                'mines_bot_enabled' => $data['mines_bot_enabled'] ?? false,
+            ]);
+        }
+
+        // Salva no JSON
         $config = [
             'telegram' => [
                 'bot_token' => $data['telegram_bot_token'],
@@ -76,6 +92,17 @@ class MinesBotConfig extends Page implements HasForms
     {
         return $form
             ->schema([
+                Section::make('Status do Bot')
+                    ->description('Controle global do envio de sinais')
+                    ->schema([
+                        Toggle::make('mines_bot_enabled')
+                            ->label('Habilitar envio de sinais')
+                            ->helperText('Se desativado, o bot continuará rodando mas não enviará mensagens no Telegram.')
+                            ->onColor('success')
+                            ->offColor('danger')
+                            ->default(false),
+                    ]),
+
                 Section::make('Configurações do Telegram')
                     ->description('Configure o token e chat ID do bot do Telegram')
                     ->schema([
