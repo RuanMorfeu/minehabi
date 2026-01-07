@@ -145,7 +145,7 @@ class MinesBotManager extends Page implements HasForms
             $logFile = storage_path('logs/mines_bot.log');
             $process = new Process([
                 'bash', '-c',
-                'cd '.base_path('bots/mines').' && source venv/bin/activate && nohup python Mines_com_api.py > '.$logFile.' 2>&1 & echo $!',
+                'cd '.base_path('bots/mines').' && source venv/bin/activate && nohup python3 Mines_com_api.py > '.$logFile.' 2>&1 & echo $!',
             ]);
             $process->setTimeout(0);
             $process->run();
@@ -163,6 +163,32 @@ class MinesBotManager extends Page implements HasForms
                     ->title('Erro ao iniciar bot')
                     ->body('Não foi possível obter o PID do processo')
                     ->danger()
+                    ->send();
+
+                return;
+            }
+
+            // Diagnóstico de Start: Aguarda 2 segundos e verifica se o processo morreu
+            sleep(2);
+            $check = trim(shell_exec("ps -p $pid -o pid="));
+
+            if (empty($check)) {
+                // O processo morreu prematuramente
+                $logContent = 'Não foi possível ler o log.';
+                if (file_exists($logFile)) {
+                    // Lê as últimas 5 linhas do log
+                    $logContent = trim(shell_exec("tail -n 5 $logFile"));
+                }
+
+                $msg = "MinesBotManager: O bot iniciou mas caiu imediatamente. Erro: $logContent";
+                Log::error($msg);
+                error_log($msg);
+
+                Notification::make()
+                    ->title('O Bot iniciou mas falhou imediatamente!')
+                    ->body("Erro do log: \n$logContent")
+                    ->danger()
+                    ->persistent() // Fica na tela até o usuário fechar
                     ->send();
 
                 return;
