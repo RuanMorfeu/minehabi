@@ -400,6 +400,7 @@ body{
     background: #f9fafb;
     padding-left: 2.5rem; /* Ajustado para ícones */
     width: 100%;
+    font-family: var(--font-family-default, 'Roboto Condensed', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
 }
 
 .snake-auth-modal .snake-auth-input:focus {

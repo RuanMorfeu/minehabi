@@ -26,7 +26,7 @@
                         class="w-full md:max-w-md lg:max-w-lg bg-gray-100 md:mt-0 dark:bg-gray-700 mx-auto shadow-lg rounded-lg"
                     >
                         <div class="p-4 space-y-3 md:space-y-4">
-                            <h1 class="mb-4 text-2xl text-center font-bold">
+                            <h1 class="mb-4 text-2xl text-center font-bold text-gray-900">
                                 {{ $t("Formulário de Registo") }}
                             </h1>
 
@@ -57,7 +57,7 @@
                                                 type="text"
                                                 name="name"
                                                 v-model="registerForm.name"
-                                                class="input-group bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                                                class="input-group bg-white border-gray-300 text-black placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500"
                                                 :placeholder="$t('Digite seu nome')"
                                                 required
                                             />
@@ -77,7 +77,7 @@
                                                 type="email"
                                                 name="email"
                                                 v-model="registerForm.email"
-                                                class="input-group bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                                                class="input-group bg-white border-gray-300 text-black placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500"
                                                 :placeholder="$t('Coloque o seu e-mail')"
                                                 required
                                             />
@@ -97,7 +97,7 @@
                                                 :type="typeInputPassword"
                                                 name="password"
                                                 v-model="registerForm.password"
-                                                class="input-group pr-[40px] bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                                                class="input-group pr-[40px] bg-white border-gray-300 text-black placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500"
                                                 :placeholder="
                                                     $t('Coloque a sua senha')
                                                 "
@@ -113,13 +113,13 @@
                                                         typeInputPassword ===
                                                         'password'
                                                     "
-                                                    class="fa-regular fa-eye"
+                                                    class="fa-regular fa-eye text-gray-500"
                                                 ></i>
                                                 <i
                                                     v-if="
                                                         typeInputPassword === 'text'
                                                     "
-                                                    class="fa-sharp fa-regular fa-eye-slash"
+                                                    class="fa-sharp fa-regular fa-eye-slash text-gray-500"
                                                 ></i>
                                             </button>
                                         </div>
@@ -138,8 +138,8 @@
                                                 v-model="registerForm.phone"
                                                 @input="validatePhone"
                                                 :class="{
-                                                    'input-group ps-16 bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500': !phoneError,
-                                                    'input-group ps-16 bg-gray-700 border-red-500 text-white placeholder-gray-400 focus:ring-red-500 focus:border-red-500': phoneError
+                                                    'input-group ps-16 bg-white border-gray-300 text-black placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500': !phoneError,
+                                                    'input-group ps-16 bg-white border-red-500 text-black placeholder-gray-500 focus:ring-red-500 focus:border-red-500': phoneError
                                                 }"
                                                 placeholder="Número de telemóvel"
                                                 maxlength="9"
@@ -168,7 +168,7 @@
                                             type="button"
                                             class="flex justify-between w-full"
                                         >
-                                            <p>
+                                            <p class="text-gray-900">
                                                 {{
                                                     $t(
                                                         "Enter Referral/Promo Code"
@@ -178,11 +178,11 @@
                                             <div class="">
                                                 <i
                                                     v-if="isReferral"
-                                                    class="fa-solid fa-chevron-up"
+                                                    class="fa-solid fa-chevron-up text-gray-900"
                                                 ></i>
                                                 <i
                                                     v-if="!isReferral"
-                                                    class="fa-solid fa-chevron-down"
+                                                    class="fa-solid fa-chevron-down text-gray-900"
                                                 ></i>
                                             </div>
                                         </button>
@@ -205,12 +205,12 @@
                                                 type="text"
                                                 name="reference_code"
                                                 v-model="registerForm.reference_code"
-                                                class="input-group bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                                                class="input-group bg-white border-gray-300 text-black placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500"
                                                 :placeholder="$t('Digite seu código promocional')"
                                             />
                                         </div>
                                     </div>
- <p class="text-sm text-gray-300 mb-6">
+ <p class="text-sm text-gray-900 mb-6">
     {{ $t('Já possui conta') }}?
     <RouterLink :to="{ name: 'login' }" active-class="top-register-active" class="">
         <strong>{{ $t('Faça login') }}</strong>
@@ -233,7 +233,7 @@
                                             />
                                             <label
                                                 for="term-a"
-                                                class="ml-2 text-sm font-medium text-left text-gray-300"
+                                                class="ml-2 text-sm font-medium text-left text-gray-900"
                                                 >{{$t("I agree to the User Agreement & confirm I am at least 18 years old")}}</label>
                                         </div>
                                     </div>

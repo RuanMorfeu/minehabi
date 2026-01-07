@@ -482,8 +482,8 @@
                                         v-model="registerForm.phone"
                                         @input="validatePhone"
                                         :class="{
-                                            'snake-auth-input !pl-16 !mt-0 text-sm snake-reset-font': !phoneError,
-                                            'snake-auth-input !pl-16 !mt-0 text-sm border-red-500 focus:ring-red-500 focus:border-red-500 snake-reset-font': phoneError
+                                            'snake-auth-input !pl-16 !mt-0 text-sm': !phoneError,
+                                            'snake-auth-input !pl-16 !mt-0 text-sm border-red-500 focus:ring-red-500 focus:border-red-500': phoneError
                                         }"
                                         placeholder="Telemóvel"
                                         maxlength="9"
