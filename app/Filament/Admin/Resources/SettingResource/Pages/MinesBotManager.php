@@ -103,6 +103,33 @@ class MinesBotManager extends Page implements HasForms
                         ]),
                     ])
                     ->columns(3),
+
+                Section::make('Logs de Diagnóstico')
+                    ->collapsed()
+                    ->description('Visualize os logs para identificar problemas')
+                    ->schema([
+                        \Filament\Forms\Components\Textarea::make('log_output')
+                            ->label('Log de Inicialização (bot_output.log)')
+                            ->rows(10)
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->formatStateUsing(function () {
+                                $path = base_path('bots/mines/bot_output.log');
+
+                                return file_exists($path) ? file_get_contents($path) : 'Arquivo de log não encontrado. Inicie o bot para gerar.';
+                            }),
+
+                        \Filament\Forms\Components\Textarea::make('log_debug')
+                            ->label('Log Interno do Bot (bot_debug.log)')
+                            ->rows(10)
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->formatStateUsing(function () {
+                                $path = base_path('bots/mines/bot_debug.log');
+
+                                return file_exists($path) ? file_get_contents($path) : 'Arquivo de log não encontrado.';
+                            }),
+                    ]),
             ])
             ->statePath('data');
     }
@@ -110,6 +137,18 @@ class MinesBotManager extends Page implements HasForms
     protected function startBot()
     {
         try {
+            // Verifica permissões de escrita no diretório de logs
+            $botDir = base_path('bots/mines');
+            if (! is_writable($botDir)) {
+                Notification::make()
+                    ->title('Erro de Permissão')
+                    ->body("O diretório {$botDir} não tem permissão de escrita. Execute: chown -R www-data:www-data {$botDir} && chmod -R 775 {$botDir}")
+                    ->danger()
+                    ->send();
+
+                return;
+            }
+
             // Garante que não tem outro bot rodando antes de iniciar
             exec('pkill -f Mines_com_api.py');
 

@@ -109,7 +109,13 @@ echo "Memory Limit: $(php -r 'echo ini_get("memory_limit");')"
 echo "Max Execution Time: $(php -r 'echo ini_get("max_execution_time");')"
 
 echo ""
-echo "✅ Deploy concluído com sucesso!"
+# Permissões da pasta do bot
+echo "🔧 Ajustando permissões do bot..."
+chown -R www-data:www-data bots/mines
+chmod -R 775 bots/mines
+find bots/mines -type f -name "*.log" -exec chmod 664 {} \;
+
+echo "✅ Deploy finalizado com sucesso!"
 echo ""
 echo "📋 Próximos passos recomendados:"
 echo "1. Verificar se o servidor web (Nginx/Apache) está configurado corretamente"
