@@ -152,20 +152,24 @@ class MinesBotManager extends Page implements HasForms
                 $this->record->update(['mines_bot_enabled' => true]);
             }
 
-            // 2. Verifica se já está rodando
+            // 2. Força o reinício para aplicar a mudança imediatamente
+            // Isso faz com que o bot saia do sleep de 30s se estiver rodando
+            exec('pkill -f Mines_com_api.py');
+            sleep(1);
+
+            // 3. Verifica se o Supervisor já ressuscitou o processo
             $pid = trim(shell_exec('pgrep -f "python Mines_com_api.py" | head -n 1'));
 
             if (! empty($pid) && is_numeric($pid)) {
                 Notification::make()
                     ->title('Bot Ativado!')
-                    ->body("O processo já estava rodando (PID: $pid). O envio de sinais foi habilitado.")
+                    ->body("Configuração aplicada. O sistema reiniciou o processo (PID: $pid) para envio imediato.")
                     ->success()
                     ->send();
             } else {
-                // 3. Se não estiver rodando, inicia
+                // 4. Se não tem Supervisor (ambiente local/teste), inicia manualmente
                 $botDir = base_path('bots/mines');
 
-                // Verifica permissões
                 if (! is_writable($botDir)) {
                     throw new \Exception("Sem permissão de escrita em $botDir");
                 }
@@ -180,7 +184,7 @@ class MinesBotManager extends Page implements HasForms
                 $newPid = trim($process->getOutput());
 
                 Notification::make()
-                    ->title('Bot Iniciado e Ativado!')
+                    ->title('Bot Iniciado Manualmente!')
                     ->body("Processo iniciado com PID: $newPid")
                     ->success()
                     ->send();
@@ -201,8 +205,7 @@ class MinesBotManager extends Page implements HasForms
     protected function stopBot()
     {
         try {
-            // Apenas desativa a flag no banco.
-            // NÃO mata o processo, pois o Supervisor reiniciaria ele.
+            // 1. Desativa a flag no banco
             if ($this->record) {
                 $this->record->update(['mines_bot_enabled' => false]);
             }
@@ -211,12 +214,15 @@ class MinesBotManager extends Page implements HasForms
             $timestamp = date('Y-m-d H:i:s');
 
             if (file_exists($logPath) && is_writable($logPath)) {
-                file_put_contents($logPath, "[$timestamp] ADMIN: Bot colocado em PAUSA (Standby). Processo mantido vivo.\n", FILE_APPEND);
+                file_put_contents($logPath, "[$timestamp] ADMIN: STOP recebido. Sinalizador desativado. O bot entrará em Standby no próximo ciclo.\n", FILE_APPEND);
             }
 
+            // NÃO mata o processo no Stop. Deixa ele perceber a mudança e entrar em sleep sozinho.
+            // Isso evita instabilidade e mantém o PID.
+
             Notification::make()
-                ->title('Bot Pausado (Standby)')
-                ->body('O envio de sinais foi interrompido. O processo continua rodando em background para evitar reinícios automáticos.')
+                ->title('Bot Pausado')
+                ->body('O envio de sinais foi desativado. O bot entrará em modo de espera em instantes.')
                 ->warning()
                 ->send();
 
