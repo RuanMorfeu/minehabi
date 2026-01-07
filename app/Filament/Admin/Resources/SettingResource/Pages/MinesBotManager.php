@@ -16,6 +16,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Process\Process;
 
 class MinesBotManager extends Page implements HasForms
@@ -66,6 +67,10 @@ class MinesBotManager extends Page implements HasForms
                                 // Verifica se existe algum processo python rodando o script do bot
                                 $pid = trim(shell_exec('pgrep -f Mines_com_api.py | head -n 1'));
 
+                                $msg = 'MinesBotManager: Verificando status. PID encontrado: '.($pid ?: 'Nenhum');
+                                Log::info($msg);
+                                error_log($msg);
+
                                 if (! empty($pid) && is_numeric($pid)) {
                                     return '🟢 Em execução (PID: '.$pid.')';
                                 }
@@ -109,21 +114,39 @@ class MinesBotManager extends Page implements HasForms
 
     protected function startBot()
     {
+        $msg = 'MinesBotManager: Solicitado início do bot.';
+        Log::info($msg);
+        error_log($msg);
+
         try {
             // Garante que não tem outro bot rodando antes de iniciar
+            $msg = 'MinesBotManager: Matando processos antigos...';
+            Log::info($msg);
+            error_log($msg);
             exec('pkill -f Mines_com_api.py');
 
-            // Executa em background sem timeout
+            // Executa em background sem timeout e salva logs
+            $msg = 'MinesBotManager: Iniciando novo processo...';
+            Log::info($msg);
+            error_log($msg);
+
+            $logFile = storage_path('logs/mines_bot.log');
             $process = new Process([
                 'bash', '-c',
-                'cd '.base_path('bots/mines').' && source venv/bin/activate && nohup python Mines_com_api.py > /dev/null 2>&1 & echo $!',
+                'cd '.base_path('bots/mines').' && source venv/bin/activate && nohup python Mines_com_api.py > '.$logFile.' 2>&1 & echo $!',
             ]);
             $process->setTimeout(0);
             $process->run();
 
             $pid = trim($process->getOutput());
+            $msg = "MinesBotManager: Processo iniciado. Output PID: {$pid}";
+            Log::info($msg);
+            error_log($msg);
 
             if (empty($pid) || ! is_numeric($pid)) {
+                $msg = 'MinesBotManager: Falha ao obter PID.';
+                Log::error($msg);
+                error_log($msg);
                 Notification::make()
                     ->title('Erro ao iniciar bot')
                     ->body('Não foi possível obter o PID do processo')
@@ -139,6 +162,9 @@ class MinesBotManager extends Page implements HasForms
                 ->success()
                 ->send();
         } catch (\Exception $e) {
+            $msg = 'MinesBotManager: Erro ao iniciar bot: '.$e->getMessage();
+            Log::error($msg);
+            error_log($msg);
             Notification::make()
                 ->title('Erro ao iniciar bot')
                 ->body($e->getMessage())
@@ -152,15 +178,42 @@ class MinesBotManager extends Page implements HasForms
 
     protected function stopBot()
     {
+        $msg = 'MinesBotManager: Solicitado parada do bot.';
+        Log::info($msg);
+        error_log($msg);
+
         try {
             // Mata todos os processos relacionados ao bot
+            $msg = 'MinesBotManager: Executando pkill...';
+            Log::info($msg);
+            error_log($msg);
             exec('pkill -f Mines_com_api.py');
+
+            // Aguarda 1 segundo para o processo encerrar
+            sleep(1);
+
+            // Verifica se ainda existe algum teimoso e força o encerramento
+            $check = trim(shell_exec('pgrep -f Mines_com_api.py'));
+            $msg = 'MinesBotManager: Verificação pós-kill. Processos restantes: '.($check ?: 'Nenhum');
+            Log::info($msg);
+            error_log($msg);
+
+            if (! empty($check)) {
+                $msg = 'MinesBotManager: Processo persistente detectado. Forçando kill -9.';
+                Log::warning($msg);
+                error_log($msg);
+                exec('pkill -9 -f Mines_com_api.py');
+                sleep(1);
+            }
 
             Notification::make()
                 ->title('Bot parado com sucesso!')
                 ->success()
                 ->send();
         } catch (\Exception $e) {
+            $msg = 'MinesBotManager: Erro ao parar bot: '.$e->getMessage();
+            Log::error($msg);
+            error_log($msg);
             Notification::make()
                 ->title('Erro ao parar bot')
                 ->body($e->getMessage())
