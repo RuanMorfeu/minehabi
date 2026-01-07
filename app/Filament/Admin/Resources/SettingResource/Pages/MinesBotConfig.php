@@ -96,7 +96,7 @@ class MinesBotConfig extends Page implements HasForms
                             ->label('URL da API Laravel')
                             ->required()
                             ->url()
-                            ->default('http://localhost:8000/api/bot/mines/status'),
+                            ->default('https://dei.bet/api/bot/mines/status'),
                     ]),
             ])
             ->statePath('data');

@@ -4,6 +4,6 @@
         "chat_id": "-1003163295272"
     },
     "api": {
-        "laravel_url": "http://localhost:8000/api/bot/mines/status"
+        "laravel_url": "https://dei.bet/api/bot/mines/status"
     }
 }
