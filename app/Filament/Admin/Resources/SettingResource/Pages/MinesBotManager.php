@@ -77,10 +77,18 @@ class MinesBotManager extends Page implements HasForms
                                     // Pega o usuário dono do processo
                                     $user = trim(shell_exec("ps -p $pid -o user="));
 
-                                    return "🟢 Em execução (PID: $pid | User: $user)\nCMD: $cmd\nPAI: $ppid ($parentCmd)";
+                                    // Verifica se está ativo no banco de dados
+                                    $setting = Setting::first();
+                                    $isEnabled = $setting ? $setting->mines_bot_enabled : false;
+
+                                    if (! $isEnabled) {
+                                        return "🟡 Standby (Pausado - Aguardando Ativação)\nPID: $pid | User: $user\nCMD: $cmd";
+                                    }
+
+                                    return "🟢 Em execução (Ativo)\nPID: $pid | User: $user\nCMD: $cmd\nPAI: $ppid ($parentCmd)";
                                 }
 
-                                return '🔴 Parado';
+                                return '🔴 Parado (Processo não encontrado)';
                             }),
                     ]),
 
@@ -147,6 +155,30 @@ class MinesBotManager extends Page implements HasForms
     protected function startBot()
     {
         try {
+            // 1. Ativa no Banco de Dados
+            if ($this->record) {
+                $this->record->update(['mines_bot_enabled' => true]);
+            }
+
+            // 2. Verifica se JÁ está rodando
+            $pids = trim(shell_exec('pgrep -f "python Mines_com_api.py"'));
+
+            if (! empty($pids)) {
+                // Se já tem processo, apenas avisa que saiu do Standby
+                Notification::make()
+                    ->title('Bot Reativado!')
+                    ->body("O processo já estava em execução (PID: $pids). O envio de sinais foi retomado.")
+                    ->success()
+                    ->send();
+
+                // Refresh e sai
+                redirect(route('filament.admin.resources.settings.mines_manager', ['record' => $this->record->id]));
+
+                return;
+            }
+
+            // 3. Se NÃO está rodando, inicia do zero
+
             // Verifica permissões de escrita no diretório de logs
             $botDir = base_path('bots/mines');
             if (! is_writable($botDir)) {
@@ -158,9 +190,6 @@ class MinesBotManager extends Page implements HasForms
 
                 return;
             }
-
-            // Garante que não tem outro bot rodando antes de iniciar
-            exec('pkill -f Mines_com_api.py');
 
             // Executa em background sem timeout, redirecionando saída para log
             $process = new Process([
@@ -205,61 +234,24 @@ class MinesBotManager extends Page implements HasForms
             $logPath = base_path('bots/mines/bot_output.log');
             $timestamp = date('Y-m-d H:i:s');
 
-            // Log do início da ação
+            // Coloca em Standby (apenas desativa no banco, mantém processo rodando)
+            if ($this->record) {
+                $this->record->update(['mines_bot_enabled' => false]);
+            }
+
+            // Log da ação
             if (file_exists($logPath) && is_writable($logPath)) {
-                file_put_contents($logPath, "\n[$timestamp] ADMIN: Comando 'Parar Bot' recebido.\n", FILE_APPEND);
-            }
-
-            // Identifica processos antes
-            $pids = trim(shell_exec('pgrep -f Mines_com_api.py'));
-
-            if (! empty($pids)) {
-                $pidsArr = explode("\n", $pids);
-                $details = [];
-                foreach ($pidsArr as $pid) {
-                    $ppid = trim(shell_exec("ps -p $pid -o ppid="));
-                    $parentCmd = trim(shell_exec("ps -p $ppid -o args="));
-                    $details[] = "PID: $pid (Pai: $ppid - $parentCmd)";
-                }
-
-                if (file_exists($logPath) && is_writable($logPath)) {
-                    file_put_contents($logPath, "[$timestamp] ADMIN: Processos encontrados:\n".implode("\n", $details)."\n", FILE_APPEND);
-                }
-            } else {
-                if (file_exists($logPath) && is_writable($logPath)) {
-                    file_put_contents($logPath, "[$timestamp] ADMIN: Nenhum processo encontrado para parar.\n", FILE_APPEND);
-                }
-            }
-
-            // Mata todos os processos relacionados ao bot
-            exec('pkill -f Mines_com_api.py');
-
-            // Aguarda 1 segundo para o sistema operacional processar
-            sleep(1);
-
-            // Verifica se ainda tem algo rodando
-            $pidsAfter = trim(shell_exec('pgrep -f Mines_com_api.py'));
-
-            if (! empty($pidsAfter)) {
-                if (file_exists($logPath) && is_writable($logPath)) {
-                    file_put_contents($logPath, "[$timestamp] ADMIN: AVISO - Processos ainda ativos (PID: $pidsAfter). Tentando kill forçado (-9)...\n", FILE_APPEND);
-                }
-
-                // Força bruta se não morreu
-                exec('pkill -9 -f Mines_com_api.py');
-            } else {
-                if (file_exists($logPath) && is_writable($logPath)) {
-                    file_put_contents($logPath, "[$timestamp] ADMIN: Todos os processos do bot foram finalizados.\n", FILE_APPEND);
-                }
+                file_put_contents($logPath, "\n[$timestamp] ADMIN: Comando 'Parar Bot' recebido. Bot colocado em STANDBY (Pausado).\n", FILE_APPEND);
             }
 
             Notification::make()
-                ->title('Bot parado com sucesso!')
+                ->title('Bot em Standby')
+                ->body('O envio de sinais foi pausado. O processo continua em execução (Standby).')
                 ->success()
                 ->send();
         } catch (\Exception $e) {
             Notification::make()
-                ->title('Erro ao parar bot')
+                ->title('Erro ao pausar bot')
                 ->body($e->getMessage())
                 ->danger()
                 ->send();
