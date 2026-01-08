@@ -61,34 +61,53 @@ class MinesBotManager extends Page implements HasForms
                     ->description('Use os botões abaixo para controlar o bot de sinais do Mines')
                     ->schema([
                         Placeholder::make('bot_status')
-                            ->label('Status do Processo')
+                            ->label('Status do(s) Processo(s)')
                             ->content(function () {
-                                // Verifica se existe algum processo python rodando o script do bot
-                                $pid = trim(shell_exec('pgrep -f "python Mines_com_api.py" | head -n 1'));
+                                // Verifica TODOS os processos python rodando o script do bot (versão nova e antiga)
+                                $pidsOutput = trim(shell_exec('pgrep -f "python Mines.*\.py"'));
 
-                                if (! empty($pid) && is_numeric($pid)) {
-                                    // Pega o comando exato para confirmar o que é
-                                    $cmd = trim(shell_exec("ps -p $pid -o args="));
-
-                                    // Pega o processo pai (quem iniciou o bot)
-                                    $ppid = trim(shell_exec("ps -p $pid -o ppid="));
-                                    $parentCmd = trim(shell_exec("ps -p $ppid -o args="));
-
-                                    // Pega o usuário dono do processo
-                                    $user = trim(shell_exec("ps -p $pid -o user="));
-
-                                    // Verifica se está ativo no banco de dados
-                                    $setting = Setting::first();
-                                    $isEnabled = $setting ? $setting->mines_bot_enabled : false;
-
-                                    if (! $isEnabled) {
-                                        return "🟡 Standby (Pausado - Aguardando Ativação)\nPID: $pid | User: $user\nCMD: $cmd";
-                                    }
-
-                                    return "🟢 Em execução (Ativo)\nPID: $pid | User: $user\nCMD: $cmd\nPAI: $ppid ($parentCmd)";
+                                if (empty($pidsOutput)) {
+                                    return '🔴 Parado (Nenhum processo encontrado)';
                                 }
 
-                                return '🔴 Parado (Processo não encontrado)';
+                                $pids = explode("\n", $pidsOutput);
+                                $statusOutput = [];
+
+                                // Verifica se está ativo no banco de dados (configuração global)
+                                $setting = Setting::first();
+                                $isEnabled = $setting ? $setting->mines_bot_enabled : false;
+
+                                foreach ($pids as $pid) {
+                                    if (empty($pid) || ! is_numeric($pid)) {
+                                        continue;
+                                    }
+
+                                    $cmd = trim(shell_exec("ps -p $pid -o args="));
+                                    $user = trim(shell_exec("ps -p $pid -o user="));
+                                    $startTime = trim(shell_exec("ps -p $pid -o lstart="));
+
+                                    // Identifica se é o bot novo ou velho
+                                    $isOldBot = strpos($cmd, 'Mines.py') !== false;
+                                    $botType = $isOldBot ? '⚠️ [VERSÃO ANTIGA]' : '✅ [NOVO]';
+
+                                    $statusIcon = $isEnabled ? '🟢' : '🟡';
+                                    $statusText = $isEnabled ? 'Ativo' : 'Standby (Pausado)';
+
+                                    if ($isOldBot) {
+                                        $statusIcon = '🚫';
+                                        $statusText = 'INVÁLIDO (Deve ser morto)';
+                                    }
+
+                                    $statusOutput[] = "$statusIcon $botType PID: $pid | User: $user | Iniciado: $startTime\nStatus: $statusText\nCMD: $cmd\n-------------------";
+                                }
+
+                                $finalStatus = implode("\n", $statusOutput);
+
+                                if (count($pids) > 1) {
+                                    $finalStatus = "⚠️ ALERTA: Múltiplos processos detectados!\nIsso pode causar envio duplicado de sinais.\nUse 'Forçar Parada Total' para limpar.\n\n".$finalStatus;
+                                }
+
+                                return $finalStatus;
                             }),
                     ]),
 
@@ -104,11 +123,29 @@ class MinesBotManager extends Page implements HasForms
                                 }),
 
                             Action::make('stop_bot')
-                                ->label('Parar Bot')
-                                ->icon('heroicon-o-stop')
-                                ->color('danger')
+                                ->label('Parar Bot (Standby)')
+                                ->icon('heroicon-o-pause')
+                                ->color('warning')
                                 ->action(function () {
                                     $this->stopBot();
+                                }),
+
+                            Action::make('kill_all')
+                                ->label('Forçar Parada Total')
+                                ->icon('heroicon-o-trash')
+                                ->color('danger')
+                                ->requiresConfirmation()
+                                ->modalHeading('Matar todos os processos?')
+                                ->modalDescription('Isso irá forçar o encerramento de TODOS os scripts Python com nome "Mines". Use isso se houver processos travados ou duplicados.')
+                                ->action(function () {
+                                    exec('pkill -9 -f "python Mines.*\.py"');
+                                    sleep(1);
+                                    Notification::make()
+                                        ->title('Limpeza Concluída')
+                                        ->body('Todos os processos Mines foram encerrados à força.')
+                                        ->success()
+                                        ->send();
+                                    redirect(route('filament.admin.resources.settings.mines_manager', ['record' => $this->record->id]));
                                 }),
 
                             Action::make('refresh_status')
