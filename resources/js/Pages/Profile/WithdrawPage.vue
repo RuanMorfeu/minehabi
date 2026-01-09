@@ -19,34 +19,15 @@
                             <p class="font-medium">Atenção!</p>
                             <p>Você precisa fazer pelo menos um depósito antes de solicitar um saque.</p>
                         </div>
-                        <!-- Mensagem de aviso quando o KYC não está aprovado e KYC é obrigatório (individual tem prioridade) -->
-                        <div v-if="shouldShowKycWarning && ((user && user.kyc_required !== undefined) ? user.kyc_required : (setting && setting.kyc_required))" class="p-6 mb-4 text-center text-orange-800 rounded-lg bg-orange-50 dark:bg-gray-800 dark:text-orange-400">
-                            <div class="mb-4">
-                                <i class="fas fa-id-card text-3xl mb-3 text-orange-600 dark:text-orange-400"></i>
-                                <p class="font-bold text-lg mb-2">Verificação Necessária!</p>
-                                <p class="text-sm mb-4">Você precisa ter seus documentos aprovados antes de solicitar um saque.</p>
-                            </div>
-                            <router-link 
-                                to="/profile/verification" 
-                                class="inline-flex items-center px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
-                            >
-                                <i class="fas fa-file-upload mr-2"></i>
-                                Verificar Documento
-                            </router-link>
-                        </div>
                         <!-- Loader enquanto verifica depósitos -->
                         <div v-if="checkingDeposits" class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400">
                             <p>Verificando informações...</p>
-                        </div>
-                        <!-- Loader enquanto verifica KYC - aparece se KYC for obrigatório (individual tem prioridade) -->
-                        <div v-if="checkingKyc && ((user && user.kyc_required !== undefined) ? user.kyc_required : (setting && setting.kyc_required))" class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400">
-                            <p>Verificando status dos documentos...</p>
                         </div>
                         <form
                             v-if="wallet.currency === 'USD'"
                             action=""
                             @submit.prevent="submitWithdrawBank"
-                            :class="{'opacity-50': (!hasDeposits && !checkingDeposits) || (((user && user.kyc_required !== undefined) ? user.kyc_required : (setting && setting.kyc_required)) && (!isKycApproved && !checkingKyc))}"
+                            :class="{'opacity-50': !hasDeposits && !checkingDeposits}"
                         >
                             <div class="flex items-center justify-between">
                                 <div>
@@ -261,7 +242,7 @@
                             v-if="wallet.currency === 'BRL'"
                             action=""
                             @submit.prevent="submitWithdraw"
-                            :class="{'opacity-50': (!hasDeposits && !checkingDeposits) || (((user && user.kyc_required !== undefined) ? user.kyc_required : (setting && setting.kyc_required)) && (!isKycApproved && !checkingKyc))}"
+                            :class="{'opacity-50': !hasDeposits && !checkingDeposits}"
                         >
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-500">
@@ -534,7 +515,7 @@
                         <form class="space-y-3" 
                             v-if="wallet.currency === 'EUR'"
                             @submit.prevent="submitWithdraw"
-                            :class="{'opacity-50': (!hasDeposits && !checkingDeposits) || (((user && user.kyc_required !== undefined) ? user.kyc_required : (setting && setting.kyc_required)) && (!isKycApproved && !checkingKyc))}"
+                            :class="{'opacity-50': !hasDeposits && !checkingDeposits}"
                         >
                             <div>
                                 <InputLabel class="mb-2">Montante</InputLabel>
@@ -836,21 +817,9 @@ export default {
                 return;
             }
             
-            // Verificar se o KYC está aprovado
-            if (!_this.isKycApproved && !_this.checkingKyc) {
-                _toast.error('Você precisa ter seus documentos aprovados antes de solicitar um saque');
-                return;
-            }
-            
             // Se ainda estiver verificando os depósitos, aguarde
             if (_this.checkingDeposits) {
                 _toast.info('Aguarde enquanto verificamos suas informações...');
-                return;
-            }
-            
-            // Se ainda estiver verificando o KYC, aguarde
-            if (_this.checkingKyc) {
-                _toast.info('Aguarde enquanto verificamos o status dos seus documentos...');
                 return;
             }
 
@@ -914,24 +883,10 @@ export default {
                 return;
             }
             
-            // Verificar se o KYC está aprovado
-            if (!this.isKycApproved && !this.checkingKyc) {
-                const _toast = useToast();
-                _toast.error('Você precisa ter seus documentos aprovados antes de solicitar um saque');
-                return;
-            }
-            
             // Se ainda estiver verificando os depósitos, aguarde
             if (this.checkingDeposits) {
                 const _toast = useToast();
                 _toast.info('Aguarde enquanto verificamos suas informações...');
-                return;
-            }
-            
-            // Se ainda estiver verificando o KYC, aguarde
-            if (this.checkingKyc) {
-                const _toast = useToast();
-                _toast.info('Aguarde enquanto verificamos o status dos seus documentos...');
                 return;
             }
 
