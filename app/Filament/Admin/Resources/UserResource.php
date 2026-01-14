@@ -222,6 +222,19 @@ class UserResource extends Resource
                             ->dehydrateStateUsing(fn ($state) => $state === '' ? null : $state)
                             ->placeholder('Aleatório (Padrão)'),
                     ])->columns(1),
+                Forms\Components\Section::make('Configurações do Chicken')
+                    ->schema([
+                        Forms\Components\TextInput::make('chicken_win_chance')
+                            ->label('Chance de Vitória (%)')
+                            ->helperText('Defina a porcentagem de chance de vitória (0-100). Se deixar em branco, usará a Configuração Global.')
+                            ->numeric()
+                            ->minValue(0)
+                            ->maxValue(100)
+                            ->suffix('%')
+                            ->nullable()
+                            ->dehydrateStateUsing(fn ($state) => $state === '' ? null : $state)
+                            ->placeholder('Aleatório (Padrão)'),
+                    ])->columns(1),
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\Toggle::make('banned')
@@ -414,6 +427,12 @@ class UserResource extends Resource
                     ->money('EUR'),
                 Tables\Columns\TextColumn::make('mines_win_chance')
                     ->label('Mines %')
+                    ->suffix('%')
+                    ->placeholder('Aleatório')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('chicken_win_chance')
+                    ->label('Chicken %')
                     ->suffix('%')
                     ->placeholder('Aleatório')
                     ->sortable()

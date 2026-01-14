@@ -172,6 +172,7 @@ class User extends Authenticatable implements FilamentUser, JWTSubject
         'skill_games_difficulty',
         'kyc_required',
         'mines_win_chance',
+        'chicken_win_chance',
     ];
 
     /*** The attributes that should be hidden for serialization.

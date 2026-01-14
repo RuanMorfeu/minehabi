@@ -38,6 +38,7 @@ import DemoPlayModal2 from "@/Pages/Web/Casino/DemoPlayModal2.vue";
 import VerificationPage from "@/Pages/Profile/VerificationPage.vue";
 import { component } from "vue-fullscreen";
 import GamesMines from "@/Pages/Games/Mines.vue";
+import GamesChicken from "@/Pages/Games/Chicken.vue";
 
 export const routes = [
     {
@@ -266,6 +267,12 @@ export const routes = [
         name: 'games.mines',
         path: '/mines',
         component: GamesMines,
+        meta: { auth: true }
+    },
+    {
+        name: 'games.chicken',
+        path: '/chicken',
+        component: GamesChicken,
         meta: { auth: true }
     }
 ];

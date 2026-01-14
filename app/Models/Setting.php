@@ -150,6 +150,9 @@ class Setting extends Model
         // Chance Global de Vitória no Mines
         'mines_win_chance',
 
+        // Chance Global de Vitória no Chicken
+        'chicken_win_chance',
+
         // Bot Mines Telegram
         'mines_bot_enabled',
 
@@ -192,5 +195,6 @@ class Setting extends Model
         'rounds_free_any_deposit_cat4' => 'integer',
         'mines_win_chance' => 'integer',
         'mines_bot_enabled' => 'boolean',
+        'chicken_win_chance' => 'integer',
     ];
 }

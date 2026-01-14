@@ -136,6 +136,11 @@ class DefaultSetting extends Page implements HasForms
                 $data['mines_win_chance'] = null;
             }
 
+            // Trata o chicken_win_chance para salvar null quando vazio
+            if (array_key_exists('chicken_win_chance', $data) && $data['chicken_win_chance'] === '') {
+                $data['chicken_win_chance'] = null;
+            }
+
             // Atualiza o registro no banco
             if ($setting->update($data)) {
                 Cache::put('setting', $setting);
@@ -216,6 +221,15 @@ class DefaultSetting extends Page implements HasForms
                     ->schema([
                         TextInput::make('mines_win_chance')
                             ->label('Chance Global de Vitória no Mines (%)')
+                            ->helperText('Defina a porcentagem global de chance de vitória (0-100). Usado se o usuário não tiver configuração específica. Se ambos nulos = Aleatório.')
+                            ->numeric()
+                            ->minValue(0)
+                            ->maxValue(100)
+                            ->suffix('%')
+                            ->nullable()
+                            ->placeholder('Aleatório (Padrão)'),
+                        TextInput::make('chicken_win_chance')
+                            ->label('Chance Global de Vitória no Chicken (%)')
                             ->helperText('Defina a porcentagem global de chance de vitória (0-100). Usado se o usuário não tiver configuração específica. Se ambos nulos = Aleatório.')
                             ->numeric()
                             ->minValue(0)

@@ -288,6 +288,22 @@ export default {
             console.log('Mines game:', minesGame);
             games.push(minesGame);
             
+            // Adiciona o Chicken manualmente
+            const chickenGame = {
+                id: 999998,
+                game_code: 'chicken-001',
+                game_name: 'Chicken',
+                cover: 'games/covers/chicken.png', // Preciso garantir que essa imagem existe ou usar uma placeholder
+                home_cover: 'games/home-covers/chicken.png',
+                distribution: 'chicken',
+                views: 999998,
+                is_featured: 1,
+                show_home: 1,
+                status: 1,
+                provider_id: null
+            };
+            games.push(chickenGame);
+            
             // Adiciona jogos exclusivos originais
             if (this.exclusive_games && this.exclusive_games.length > 0) {
                 console.log('Adicionando exclusive_games:', this.exclusive_games.map(g => g.game_name));

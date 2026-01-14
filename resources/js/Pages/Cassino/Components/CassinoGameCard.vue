@@ -199,6 +199,8 @@ const getRouterLink = () => {
         return { name: 'playModal2', params: { slug: props.game.game_code } };
     } else if (props.game.distribution === 'mines' || props.game.game_code === 'mines-001') {
         return { name: 'games.mines' };
+    } else if (props.game.distribution === 'chicken' || props.game.game_code === 'chicken-001') {
+        return { name: 'games.chicken' };
     } else {
         return { name: 'casinoPlayPage', params: { id: props.game.id, slug: props.game.game_code }};
     }

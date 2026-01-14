@@ -146,6 +146,16 @@ class Core
         return $changeBonus;
     }
 
+    /*** @param Wallet $wallet
+     * @param $bet
+     * @return string - Método específico para Chicken
+     */
+    public static function DiscountBalanceChicken(Wallet $wallet, $bet)
+    {
+        // Reusa a mesma lógica de prioridade do Mines (Bonus -> Balance -> Withdrawal)
+        return self::DiscountBalanceMines($wallet, $bet);
+    }
+
     /*** Paga e atualiza o bonus vip
      *
 

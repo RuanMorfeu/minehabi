@@ -32,6 +32,15 @@ Route::middleware(['auth.jwt'])->prefix('mines')->group(function () {
 });
 
 /*
+ * Chicken Game API Routes
+ */
+Route::middleware(['auth.jwt'])->prefix('chicken')->group(function () {
+    Route::post('start', [\App\Http\Controllers\Games\ChickenController::class, 'startGame']);
+    Route::post('play', [\App\Http\Controllers\Games\ChickenController::class, 'playStep']);
+    Route::post('cashout', [\App\Http\Controllers\Games\ChickenController::class, 'cashout']);
+});
+
+/*
  * Cache Routes
  */
 Route::get('cache/version', [\App\Http\Controllers\Api\CacheController::class, 'getVersion']);
