@@ -39,6 +39,7 @@ import VerificationPage from "@/Pages/Profile/VerificationPage.vue";
 import { component } from "vue-fullscreen";
 import GamesMines from "@/Pages/Games/Mines.vue";
 import GamesChicken from "@/Pages/Games/Chicken.vue";
+import GamesAviator from "@/Pages/Games/Aviator.vue";
 
 export const routes = [
     {
@@ -274,6 +275,12 @@ export const routes = [
         path: '/chicken',
         component: GamesChicken,
         meta: { auth: true }
+    },
+    {
+        name: 'games.aviator',
+        path: '/aviator',
+        component: GamesAviator,
+        meta: { auth: true }
     }
 ];
 
@@ -287,6 +294,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+    console.log('Router: Navegando de', from.path, 'para', to.path, 'Nome:', to.name);
+
     // Captura código da URL e salva no localStorage
     const referralCode = to.query.code;
     
@@ -298,7 +307,13 @@ router.beforeEach(async (to, from, next) => {
     // Verificação de autenticação para rotas protegidas
     if(to.meta?.auth) {
         const auth = useAuthStore();
-        auth.isAuth ? next() : next({ name: 'home' });
+        console.log('Router: Rota protegida. Auth status:', auth.isAuth);
+        if (auth.isAuth) {
+            next();
+        } else {
+            console.warn('Router: Usuário não autenticado. Redirecionando para home.');
+            next({ name: 'home' });
+        }
     }else{
         next();
     }

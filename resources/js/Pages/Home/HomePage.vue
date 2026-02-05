@@ -304,6 +304,22 @@ export default {
             };
             games.push(chickenGame);
             
+            // Adiciona o Aviator manualmente (jogo externo)
+            const aviatorGame = {
+                id: 999997,
+                game_code: 'aviator-001',
+                game_name: 'Aviator',
+                cover: 'games/covers/aviator.png',
+                home_cover: 'games/home-covers/aviator.png',
+                distribution: 'aviator',
+                views: 999997,
+                is_featured: 1,
+                show_home: 1,
+                status: 1,
+                provider_id: null
+            };
+            games.push(aviatorGame);
+            
             // Adiciona jogos exclusivos originais
             if (this.exclusive_games && this.exclusive_games.length > 0) {
                 console.log('Adicionando exclusive_games:', this.exclusive_games.map(g => g.game_name));

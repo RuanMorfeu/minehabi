@@ -79,6 +79,37 @@ Route::get('/download-zip', [\App\Http\Controllers\DownloadController::class, 'd
 // Rotas do jogo Mines
 Route::get('/mines', [MinesController::class, 'index'])->name('games.mines');
 
+// Rotas do jogo Aviator
+Route::get('/aviator', [\App\Http\Controllers\Games\AviatorController::class, 'index'])->name('games.aviator');
+Route::get('/aviator/play', [\App\Http\Controllers\Games\AviatorController::class, 'play'])->name('games.aviator.play');
+
+// API Routes do Aviator - PÚBLICAS (Para o jogo rodar/visualizar sem login)
+Route::post('/game/existence', [\App\Http\Controllers\Games\AviatorController::class, 'game_existence']);
+Route::post('/game/new_game_generated', [\App\Http\Controllers\Games\AviatorController::class, 'new_game_generated']);
+Route::post('/game/increamentor', [\App\Http\Controllers\Games\AviatorController::class, 'increamentor']);
+Route::post('/game/game_over', [\App\Http\Controllers\Games\AviatorController::class, 'game_over']);
+Route::post('/game/currentlybet', [\App\Http\Controllers\Games\AviatorController::class, 'currentlybet']);
+Route::post('/game/crash_plane', [\App\Http\Controllers\Games\AviatorController::class, 'crash_plane']);
+Route::post('/game/currentid', [\App\Http\Controllers\Games\AviatorController::class, 'api_currentid']);
+Route::get('/get_user_details', [\App\Http\Controllers\Games\AviatorController::class, 'getUserDetails']);
+Route::post('/is_login', [\App\Http\Controllers\Games\AviatorController::class, 'isLogin']);
+Route::post('/previous_game_bet_list', [\App\Http\Controllers\Games\AviatorController::class, 'previousGameBetList']);
+Route::get('/get_avatar', [\App\Http\Controllers\Games\AviatorController::class, 'getAvatar']);
+// Rotas que o frontend chama periodicamente e devem ser públicas (controller trata guest)
+Route::post('/game/my_bets_history', [\App\Http\Controllers\Games\AviatorController::class, 'my_bets_history']);
+Route::post('/member_bet', [\App\Http\Controllers\Games\AviatorController::class, 'memberBet']);
+Route::post('/update_is_notify', [\App\Http\Controllers\Games\AviatorController::class, 'updateIsNotify']);
+Route::post('/change_avatar', [\App\Http\Controllers\Games\AviatorController::class, 'changeAvatar']);
+
+Route::middleware(['auth'])->group(function () {
+    // API Routes do Aviator - PROTEGIDAS (Ações de usuário/financeiras)
+    Route::post('/game/add_bet', [\App\Http\Controllers\Games\AviatorController::class, 'betNow']);
+    Route::get('/cash_out', [\App\Http\Controllers\Games\AviatorController::class, 'cashout']);
+
+    // Rotas auxiliares autenticadas
+    // (Movidas para públicas para evitar 401 em guest mode, já que controllers tratam auth)
+});
+
 // GAMES PROVIDER
 // include_once(__DIR__ . '/groups/provider/apiPragmatic40.php');
 include_once __DIR__.'/groups/provider/playFiver.php';

@@ -105,13 +105,51 @@ const checkUserHasDeposits = async () => {
 };
 
 const handlePlay = async (navigate) => {
-    // console.log('--- handlePlay CALLED ---', { 
-    //     game: props.game.game_name, 
-    //     provider: props.game.provider?.name, 
-    //     distribution: props.game.distribution,
-    //     game_id: props.game.id,
-    //     game_obj: props.game
-    // });
+    console.log('--- handlePlay CALLED ---', { 
+        game: props.game.game_name, 
+        provider: props.game.provider?.name, 
+        distribution: props.game.distribution,
+        game_code: props.game.game_code,
+        game_id: props.game.id,
+        game_obj: props.game
+    });
+    
+    // Verificação IMEDIATA para jogos in-house - deve vir antes de tudo!
+    if (props.game.distribution === 'mines' || 
+        props.game.game_code === 'mines-001' ||
+        props.game.distribution === 'chicken' || 
+        props.game.game_code === 'chicken-001' ||
+        props.game.distribution === 'aviator' || 
+        props.game.game_code === 'aviator-001') {
+        console.log('Jogo in-house detectado:', props.game.game_name, '- Navegando diretamente via router.push');
+        try {
+            const routeLink = getRouterLink();
+            console.log('Destino da rota:', routeLink);
+            
+            // Se for Aviator, força a navegação para a rota nomeada
+            if (props.game.distribution === 'aviator' || props.game.game_code === 'aviator-001') {
+                router.push({ name: 'games.aviator' });
+            } else {
+                router.push(routeLink);
+            }
+            
+            console.log('Navegação solicitada');
+        } catch (error) {
+            console.error('Erro na navegação:', error);
+        }
+        return;
+    }
+    
+    // Verificação para o Aviator removida pois agora ele é tratado acima como in-house SPA
+    /* 
+    if (props.game.distribution === 'aviator' || 
+        props.game.game_code === 'aviator-001' ||
+        (props.game.game_name && props.game.game_name.toLowerCase().includes('aviator'))) {
+        console.log('Aviator detectado - Navegando para rota Blade');
+        window.location.href = '/aviator';
+        return;
+    }
+    */
     
     // Verificar se é um jogo de provedor alvo ou exclusivo
     const providerName = props.game.provider ? props.game.provider.name : null;
@@ -201,6 +239,8 @@ const getRouterLink = () => {
         return { name: 'games.mines' };
     } else if (props.game.distribution === 'chicken' || props.game.game_code === 'chicken-001') {
         return { name: 'games.chicken' };
+    } else if (props.game.distribution === 'aviator' || props.game.game_code === 'aviator-001') {
+        return { name: 'games.aviator' };
     } else {
         return { name: 'casinoPlayPage', params: { id: props.game.id, slug: props.game.game_code }};
     }

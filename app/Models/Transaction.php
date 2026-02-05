@@ -29,5 +29,12 @@ class Transaction extends Model
         'accept_bonus',
         'status',
         'idUnico',
+        // Campos para transações de jogos
+        'type',
+        'amount',
+        'game_id',
+        'description',
+        'wallet_type',
+        'balance_type',
     ];
 }
